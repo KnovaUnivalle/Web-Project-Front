@@ -9,8 +9,8 @@ const AppRoutes = () => {
 		<>
 			<Routes>
 				<Route path='*' element={<NotFound />} />
-				<Route path='/' element={<Home />} />
-				<Route path='/land' element={<LandingPage />} />
+				<Route path='/' element={<LandingPage />} />
+				<Route path='/home' element={<Home />} />
 			</Routes>
 		</>
 	);
