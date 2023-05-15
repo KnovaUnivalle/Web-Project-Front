@@ -7,7 +7,7 @@ export default {
 				softlime: '#6EB500',
 				softblue: '#104BA9',
 				softorange: '#FFA200',
-				softgrey: '#f2f3f5',
+				softgrey: '#f7f7f7',
 			},
 		},
 	},
