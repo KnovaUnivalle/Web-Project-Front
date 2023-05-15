@@ -16,8 +16,8 @@ const Welcome = () => {
 						Detective
 					</h2>
 					<p className='p-2 lg:p-0 lg:pr-44 lg:text-xl'>
-						Existen muchos productos para consumir, que se venden por diferentes almacenes, pero
-						cómo encontrar el <b>Mejor Precio.</b> Hoy existe <b>Detective </b>
+						Existen muchos productos para consumir que se venden por diferentes almacenes, pero cómo
+						encontrar el <b>Mejor Precio.</b> Hoy existe <b>Detective </b>
 						conocelo:
 					</p>
 					<Button

@@ -9,6 +9,12 @@ export default {
 				softorange: '#FFA200',
 				softgrey: '#f7f7f7',
 			},
+			backgroundImage: {
+				food: "url('./src/assets/bg_food.jpg')",
+			},
+			height: {
+				128: '32rem',
+			},
 		},
 	},
 
