@@ -1,17 +1,20 @@
+import { Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
-import LandingPage from '../pages/LandingPage';
-import NotFound from '../pages/NotFound';
+const LandingPage = lazy(() => import('../pages/LandingPage'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 import Home from '../pages/Home';
 
 const AppRoutes = () => {
 	return (
 		<>
-			<Routes>
-				<Route path='*' element={<NotFound />} />
-				<Route path='/' element={<LandingPage />} />
-				<Route path='/home' element={<Home />} />
-			</Routes>
+			<Suspense fallback={<div>Cargando</div>}>
+				<Routes>
+					<Route path='*' element={<NotFound />} />
+					<Route path='home/*' element={<LandingPage />} />
+					<Route path='/' element={<Home />} />
+				</Routes>
+			</Suspense>
 		</>
 	);
 };

@@ -1,8 +1,11 @@
 import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Movil = ({ pages }) => {
+	const navigate = useNavigate();
+
 	const [menu, setMenu] = useState(null);
 
 	const handleOpenMenu = (event) => {
@@ -38,10 +41,10 @@ const Movil = ({ pages }) => {
 					}}
 				>
 					{pages.map((page) => (
-						<MenuItem key={`menuitem${page.id}`} onClick={handleCloseMenu}>
-							<a href={`#${page.id}`}>
+						<MenuItem key={`menumovilitem${page.id}`} onClick={handleCloseMenu}>
+							<button onClick={() => navigate(page.id)} type='button'>
 								<Typography textAlign='center'>{page.title}</Typography>
-							</a>
+							</button>
 						</MenuItem>
 					))}
 				</Menu>
