@@ -10,7 +10,7 @@ export default {
 				softgrey: '#f7f7f7',
 			},
 			backgroundImage: {
-				food: "url('./src/assets/bg_food.jpg')",
+				food: "url('/src/assets/bg_food.jpg')",
 			},
 			height: {
 				128: '32rem',
