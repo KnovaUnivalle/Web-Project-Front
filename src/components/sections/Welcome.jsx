@@ -1,14 +1,16 @@
 import { Button } from '@mui/material';
 import food from '../../assets/food.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<section
 				id='welcome'
-				className='text-center py-24 lg:text-left sm:pb-72 lg:pb-64 sm:flex-wrap sm:justify-between sm:flex sm:flex-row '
+				className='text-center py-24 sm:pb-72 sm:flex-wrap sm:justify-between sm:flex sm:flex-row md:min-h-screen lg:pb-64 lg:text-left'
 			>
-				<div className='p-7 lg:w-2/3 lg:pl-14'>
+				<div className='m-auto p-7'>
 					<h2 className='text-6xl font-bold font-serif lg:text-7xl'>
 						Bienvenida(o)
 						<br />
@@ -16,7 +18,7 @@ const Welcome = () => {
 						<br />
 						Detective
 					</h2>
-					<p className='p-2 lg:p-0 lg:pr-44 lg:text-xl'>
+					<p className='p-2 md:w-3/5 lg:p-0 lg:text-xl'>
 						Existen muchos productos para consumir que se venden por diferentes almacenes, pero cómo
 						encontrar el <b>Mejor Precio.</b> Hoy existe <b>Detective </b>
 						conocelo:
@@ -25,11 +27,14 @@ const Welcome = () => {
 						disableElevation
 						style={{ background: '#6EB500', marginTop: '1rem' }}
 						variant='contained'
+						onClick={() => navigate('/home')}
 					>
 						Comienza Ya!
 					</Button>
 				</div>
-				<img src={food} alt='Food bag' className='w-36 m-auto py-10 sm:w-56' />
+				<div className='m-auto'>
+					<img src={food} alt='Food bag' className='w-36 m-auto py-10 sm:w-56 md:pr-10 md:w-72' />
+				</div>
 			</section>
 		</>
 	);

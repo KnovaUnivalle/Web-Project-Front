@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { userSchema } from '../../schemas/signUpSchema';
 import { Button, FormGroup } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -10,6 +11,7 @@ const styles = {
 };
 
 const SignUpUser = () => {
+	const navigate = useNavigate();
 	return (
 		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-2/5'>
 			<Formik
@@ -92,8 +94,12 @@ const SignUpUser = () => {
 				</Form>
 			</Formik>
 			<div className='flex justify-around pt-3'>
-				<Button style={{ color: '#6EB500' }}>Regresar</Button>
-				<Button style={{ color: '#6EB500' }}>Iniciar Sesión</Button>
+				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/')}>
+					Regresar
+				</Button>
+				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/login')}>
+					Iniciar Sesión
+				</Button>
 			</div>
 		</div>
 	);
