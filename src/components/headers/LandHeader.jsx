@@ -4,8 +4,9 @@ import Movil from '../menus/Movil';
 
 const pages = [
 	{ title: 'Inicio', id: '/' },
-	{ title: 'Nuestro Servicio', id: '/service' },
-	{ title: 'Nuestro Equipo', id: '/team' },
+	{ title: 'Servicio', id: '/service' },
+	{ title: 'Equipo', id: '/team' },
+	{ title: 'Resgistrarse', id: '/signup' },
 	{ title: 'Iniciar Sesión', id: '/login' },
 ];
 

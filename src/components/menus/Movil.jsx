@@ -47,7 +47,7 @@ const Movil = ({ pages }) => {
 				>
 					{pages.map((page) => (
 						<MenuItem key={`menumovilitem${page.id}`} onClick={() => goPage(page.id)}>
-							<Typography textAlign='center'>{page.title}</Typography>
+							{page.title}
 						</MenuItem>
 					))}
 				</Menu>
