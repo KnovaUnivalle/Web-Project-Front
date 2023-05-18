@@ -28,7 +28,7 @@ const Welcome = () => {
 						Comienza Ya!
 					</Button>
 				</div>
-				<img src='/src/assets/food.svg' alt='Food bag' className='w-36 m-auto py-10 sm:w-56' />
+				<img src='src/assets/food.svg' alt='Food bag' className='w-36 m-auto py-10 sm:w-56' />
 			</section>
 		</>
 	);

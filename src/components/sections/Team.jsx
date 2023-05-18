@@ -40,10 +40,10 @@ const Team = () => {
 					{members.map((member) => {
 						if (member.female) {
 							return (
-								<article key={member.name} className='px-2 py-2'>
+								<article key={`team${member.name}`} className='px-2 py-2'>
 									<a href={member.profile} target='_blanck'>
 										<img
-											src='/src/assets/female_avatar.svg'
+											src='src/assets/female_avatar.svg'
 											alt='Female Avatar'
 											className='w-20 m-auto pt-5 pb-1'
 										/>
@@ -57,7 +57,7 @@ const Team = () => {
 							<article key={member.name} className='px-2 pt-3 pb-2'>
 								<a href={member.profile} target='_blanck'>
 									<img
-										src='/src/assets/male_avatar.svg'
+										src='src/assets/male_avatar.svg'
 										alt='Female Avatar'
 										className='w-20 m-auto pt-5'
 									/>

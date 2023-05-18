@@ -12,6 +12,11 @@ const Movil = ({ pages }) => {
 		setMenu(event.currentTarget);
 	};
 
+	const goPage = (url) => {
+		setMenu(null);
+		navigate(url);
+	};
+
 	const handleCloseMenu = () => {
 		setMenu(null);
 	};
@@ -41,10 +46,8 @@ const Movil = ({ pages }) => {
 					}}
 				>
 					{pages.map((page) => (
-						<MenuItem key={`menumovilitem${page.id}`} onClick={handleCloseMenu}>
-							<button onClick={() => navigate(page.id)} type='button'>
-								<Typography textAlign='center'>{page.title}</Typography>
-							</button>
+						<MenuItem key={`menumovilitem${page.id}`} onClick={() => goPage(page.id)}>
+							<Typography textAlign='center'>{page.title}</Typography>
 						</MenuItem>
 					))}
 				</Menu>

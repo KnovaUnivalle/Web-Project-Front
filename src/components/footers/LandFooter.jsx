@@ -27,7 +27,7 @@ const LandFooter = () => {
 						<div>
 							{socials.map((social) => {
 								return (
-									<IconButton key={social.name} style={{ color: 'black' }}>
+									<IconButton key={`social${social.name}`} style={{ color: 'black' }}>
 										<a href={social.ref} target='_blank' rel='noreferrer'>
 											<Tooltip title={social.name}>{social.icon}</Tooltip>
 										</a>

@@ -3,9 +3,9 @@ import LandMenu from '../menus/LandMenu';
 import Movil from '../menus/Movil';
 
 const pages = [
-	{ title: 'Home', id: '/home' },
-	{ title: 'Nuestro Servicio', id: '/home/service' },
-	{ title: 'Nuestro Equipo', id: '/home/team' },
+	{ title: 'Inicio', id: '/' },
+	{ title: 'Nuestro Servicio', id: '/service' },
+	{ title: 'Nuestro Equipo', id: '/team' },
 	{ title: 'Iniciar Sesión', id: '/login' },
 ];
 
