@@ -1,3 +1,6 @@
+import male from '../../assets/male_avatar.svg';
+import female from '../../assets/female_avatar.svg';
+
 const members = [
 	{
 		name: 'Sara Erazo',
@@ -42,11 +45,7 @@ const Team = () => {
 							return (
 								<article key={`team${member.name}`} className='px-2 py-2'>
 									<a href={member.profile} target='_blanck'>
-										<img
-											src='src/assets/female_avatar.svg'
-											alt='Female Avatar'
-											className='w-20 m-auto pt-5 pb-1'
-										/>
+										<img src={female} alt='Female Avatar' className='w-20 m-auto pt-5 pb-1' />
 										<p className='font-semibold'>{member.name}</p>
 										<p>{member.role}</p>
 									</a>
@@ -56,11 +55,7 @@ const Team = () => {
 						return (
 							<article key={member.name} className='px-2 pt-3 pb-2'>
 								<a href={member.profile} target='_blanck'>
-									<img
-										src='src/assets/male_avatar.svg'
-										alt='Female Avatar'
-										className='w-20 m-auto pt-5'
-									/>
+									<img src={male} alt='Female Avatar' className='w-20 m-auto pt-5' />
 									<p className='font-semibold'>{member.name}</p>
 									<p>{member.role}</p>
 								</a>

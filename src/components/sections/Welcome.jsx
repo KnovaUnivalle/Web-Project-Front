@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import food from '../../assets/food.svg';
 
 const Welcome = () => {
 	return (
@@ -28,7 +29,7 @@ const Welcome = () => {
 						Comienza Ya!
 					</Button>
 				</div>
-				<img src='src/assets/food.svg' alt='Food bag' className='w-36 m-auto py-10 sm:w-56' />
+				<img src={food} alt='Food bag' className='w-36 m-auto py-10 sm:w-56' />
 			</section>
 		</>
 	);

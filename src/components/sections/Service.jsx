@@ -1,20 +1,23 @@
 import { Card, CardContent, CardMedia } from '@mui/material';
+import food from '../../assets/food_service.svg';
+import hygiene from '../../assets/hygiene_service.svg';
+import cosmetic from '../../assets/cosmetic_service.svg';
 
 const services = [
 	{
 		title: 'Productos Alimenticios',
 		body: 'Desde carnes, verduras y frutas, hasta golosinas y bebidas',
-		img: 'src/assets/food_service.svg',
+		img: food,
 	},
 	{
 		title: 'Productos Higiénicos',
 		body: 'Puedes encontrar cepillos, jabones y más implementos',
-		img: 'src/assets/hygiene_service.svg',
+		img: hygiene,
 	},
 	{
 		title: 'Productos Cosméticos',
 		body: 'Para que cuides tu imagen y tu bolsillo',
-		img: 'src/assets/cosmetic_service.svg',
+		img: cosmetic,
 	},
 ];
 
