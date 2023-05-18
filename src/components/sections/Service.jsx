@@ -8,12 +8,12 @@ const services = [
 	},
 	{
 		title: 'Productos Higiénicos',
-		body: 'Desde carnes, verduras y frutas, hasta golosinas y bebidas',
+		body: 'Puedes encontrar cepillos, jabones y más implementos',
 		img: 'src/assets/hygiene_service.svg',
 	},
 	{
 		title: 'Productos Cosméticos',
-		body: 'Desde carnes, verduras y frutas, hasta golosinas y bebidas',
+		body: 'Para que cuides tu imagen y tu bolsillo',
 		img: 'src/assets/cosmetic_service.svg',
 	},
 ];
@@ -21,7 +21,7 @@ const services = [
 const Service = () => {
 	return (
 		<>
-			<section id='service' className='text-center pb-4'>
+			<section id='service' className='text-center pb-2'>
 				<h2 className='text-3xl font-bold font-serif'>Nuestro Servicio</h2>
 				<p>Hay diferentes categorías de productos que puedes encontrar:</p>
 				<div className='flex justify-center flex-wrap py-4'>

@@ -34,7 +34,7 @@ const members = [
 const Team = () => {
 	return (
 		<>
-			<section id='team' className='text-center pt-8'>
+			<section id='team' className='text-center pt-8 my-auto'>
 				<h2 className='text-3xl font-bold font-serif'>Conoce nuestro equipo</h2>
 				<div className='flex flex-wrap flex-row md:flex-row justify-center'>
 					{members.map((member) => {
