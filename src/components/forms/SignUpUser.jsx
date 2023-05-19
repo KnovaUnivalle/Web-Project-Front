@@ -3,6 +3,8 @@ import { userSchema } from '../../schemas/signUpSchema';
 import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import API from '../../utils/API';
+import { useState } from 'react';
+import ErrorDialog from '../dialogs/ErrorDialog';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -11,8 +13,31 @@ const styles = {
 		'p-1 my-1 border rounded border-slate-300 shadow-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:shadow-outline focus:outline-none',
 };
 
+const errorMessage = {
+	title: 'Fallo en el registro',
+	body: 'El Correo ya se encuentra registrado.',
+};
+
 const SignUpUser = () => {
+	const [openDialogs, setOpenDialogs] = useState({ err: false, info: false });
 	const navigate = useNavigate();
+
+	const openErr = () => {
+		setOpenDialogs({ ...openDialogs, err: true });
+	};
+
+	const closeErr = () => {
+		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const openInfo = () => {
+		setOpenDialogs({ ...openDialogs, info: true });
+	};
+
+	const closeInfo = () => {
+		setOpenDialogs({ ...openDialogs, info: false });
+		navigate('/signin');
+	};
 
 	const handleSubmit = async (values) => {
 		API.post('user/register/', values)
@@ -23,7 +48,7 @@ const SignUpUser = () => {
 			})
 			.catch((err) => {
 				if (err.response.status === 400) {
-					alert('Correo ya registrado');
+					openErr();
 				}
 			});
 	};
@@ -114,6 +139,7 @@ const SignUpUser = () => {
 					Iniciar Sesión
 				</Button>
 			</div>
+			<ErrorDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 		</div>
 	);
 };

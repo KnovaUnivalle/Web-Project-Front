@@ -9,25 +9,19 @@ import {
 import { useState } from 'react';
 
 const ErrorDialog = ({
-	title = 'error',
-	body = 'error',
+	message = { title: 'error', body: 'error' },
 	open = false,
 	close = () => {
 		console.log('close');
 	},
 }) => {
-	const [openDialog, setOpenDialog] = useState(open);
-	const handleClose = () => {
-		close();
-		setOpenDialog(false);
-	};
 	return (
-		<Dialog onClose={handleClose} open={openDialog}>
-			<DialogTitle>{title}</DialogTitle>
+		<Dialog onClose={close} open={open}>
+			<DialogTitle>{message.title}</DialogTitle>
 			<DialogContent>
-				<DialogContentText sx={{ width: '20rem' }}>{body}</DialogContentText>
+				<DialogContentText sx={{ width: '16rem' }}>{message.body}</DialogContentText>
 				<DialogActions>
-					<Button color='info' variant='contained' onClick={handleClose}>
+					<Button color='info' variant='contained' onClick={close}>
 						OK
 					</Button>
 				</DialogActions>
