@@ -3,6 +3,7 @@ import { signInSchema } from '../schemas/signInSchema';
 import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/API';
+import ErrorDialog from '../components/dialogs/ErrorDialog';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -30,6 +31,7 @@ const SignIn = () => {
 
 	return (
 		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3'>
+			<ErrorDialog />
 			<Formik
 				initialValues={{
 					email: '',
