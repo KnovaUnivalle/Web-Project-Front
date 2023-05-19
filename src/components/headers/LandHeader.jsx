@@ -6,7 +6,7 @@ const pages = [
 	{ title: 'Inicio', id: '/' },
 	{ title: 'Servicio', id: '/service' },
 	{ title: 'Equipo', id: '/team' },
-	{ title: 'Resgistrarse', id: '/signup' },
+	{ title: 'Registrarse', id: '/signup' },
 	{ title: 'Iniciar Sesión', id: '/login' },
 ];
 

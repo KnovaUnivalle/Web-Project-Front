@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { userSchema } from '../../schemas/signUpSchema';
 import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import API from '../../utils/API';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -12,6 +13,19 @@ const styles = {
 
 const SignUpUser = () => {
 	const navigate = useNavigate();
+
+	const handleSubmit = async (values) => {
+		API.post('user/register/', values)
+			.then((response) => {
+				navigate('/home');
+			})
+			.catch((err) => {
+				if (err.response.status === 400) {
+					alert('Correo ya registrado');
+				}
+			});
+	};
+
 	return (
 		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-2/5'>
 			<Formik
@@ -23,10 +37,7 @@ const SignUpUser = () => {
 					rol: 1,
 					birth_date: '',
 				}}
-				onSubmit={async (values) => {
-					await new Promise((r) => setTimeout(r, 500));
-					alert(JSON.stringify(values, null, 2));
-				}}
+				onSubmit={handleSubmit}
 				validationSchema={userSchema}
 			>
 				<Form className='ring-4 shadow-xl rounded-xl ring-gray-400 p-10'>
