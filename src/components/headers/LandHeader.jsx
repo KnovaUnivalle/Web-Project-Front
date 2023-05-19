@@ -7,7 +7,7 @@ const pages = [
 	{ title: 'Servicio', id: '/service' },
 	{ title: 'Equipo', id: '/team' },
 	{ title: 'Registrarse', id: '/signup' },
-	{ title: 'Iniciar Sesión', id: '/login' },
+	{ title: 'Iniciar Sesión', id: '/signin' },
 ];
 
 const LandHeader = () => {

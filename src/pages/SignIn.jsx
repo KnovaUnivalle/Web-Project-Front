@@ -1,8 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { userSchema } from '../../schemas/signUpSchema';
+import { signInSchema } from '../schemas/signInSchema';
 import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import API from '../../utils/API';
+import API from '../utils/API';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -11,19 +11,19 @@ const styles = {
 		'p-1 my-1 border rounded border-slate-300 shadow-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:shadow-outline focus:outline-none',
 };
 
-const SignUpUser = () => {
+const SignIn = () => {
 	const navigate = useNavigate();
 
-	const handleSubmit = async (values) => {
-		API.post('user/register/', values)
+	const handleSubmit = (values) => {
+		API.post('login/', values)
 			.then((response) => {
-				if (response.status === 201) {
-					navigate('/signin');
+				if (response.status === 200) {
+					navigate('/home');
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 400) {
-					alert('Correo ya registrado');
+				if (err.response.status === 401) {
+					alert('Usuario no registrado');
 				}
 			});
 	};
@@ -32,48 +32,14 @@ const SignUpUser = () => {
 		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3'>
 			<Formik
 				initialValues={{
-					name: '',
-					last_name: '',
 					email: '',
 					password: '',
-					rol: 1,
-					birth_date: '',
 				}}
 				onSubmit={handleSubmit}
-				validationSchema={userSchema}
+				validationSchema={signInSchema}
 			>
 				<Form className='ring-4 shadow-xl rounded-xl ring-gray-400 p-10'>
-					<h1 className='text-center text-3xl font-semibold font-serif'>Registro de usuario</h1>
-					<FormGroup className={styles.formGroup}>
-						<label htmlFor='name'>Nombre: </label>
-						<Field
-							className={styles.field}
-							name='name'
-							placeholder='Escribe aquí tu nombre'
-							type='text'
-						/>
-						<ErrorMessage name='name' component='div' className={styles.errorMessage} />
-					</FormGroup>
-					<FormGroup className={styles.formGroup}>
-						<label htmlFor='last_name'>Apellidos: </label>
-						<Field
-							className={styles.field}
-							name='last_name'
-							placeholder='Escribe aquí tus apellidos'
-							type='text'
-						/>
-						<ErrorMessage name='last_name' component='div' className={styles.errorMessage} />
-					</FormGroup>
-					<FormGroup className={styles.formGroup}>
-						<label htmlFor='birth_date'>Fecha de Nacimiento: </label>
-						<Field
-							className={styles.field}
-							name='birth_date'
-							placeholder='Selecciona aquí tu fecha de nacimiento'
-							type='date'
-						/>
-						<ErrorMessage name='birth_date' component='div' className={styles.errorMessage} />
-					</FormGroup>
+					<h1 className='text-center text-3xl font-semibold font-serif'>Inicio de sesión</h1>
 					<FormGroup className={styles.formGroup}>
 						<label htmlFor='email'>Correo Electronico: </label>
 						<Field
@@ -101,7 +67,7 @@ const SignUpUser = () => {
 							disableElevation
 							style={{ background: '#6EB500', marginTop: '1rem' }}
 						>
-							Crear Usuario
+							Iniciar sesión
 						</Button>
 					</div>
 				</Form>
@@ -110,12 +76,12 @@ const SignUpUser = () => {
 				<Button style={{ color: '#6EB500' }} onClick={() => navigate(-1)}>
 					Regresar
 				</Button>
-				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/signin')}>
-					Iniciar Sesión
+				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/signup')}>
+					Registrarse
 				</Button>
 			</div>
 		</div>
 	);
 };
 
-export default SignUpUser;
+export default SignIn;
