@@ -93,7 +93,7 @@ const SignUpUser = () => {
 					</div>
 				</Form>
 			</Formik>
-			<div className='flex justify-around pt-3'>
+			<div className='flex justify-between pt-3'>
 				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/')}>
 					Regresar
 				</Button>
