@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-const ErrorDialog = ({
+const InfoDialog = ({
 	message = { title: 'error', body: 'error' },
 	open = false,
 	close = () => {
@@ -30,4 +30,4 @@ const ErrorDialog = ({
 	);
 };
 
-export default ErrorDialog;
+export default InfoDialog;

@@ -3,7 +3,8 @@ import { signInSchema } from '../schemas/signInSchema';
 import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/API';
-import ErrorDialog from '../components/dialogs/ErrorDialog';
+import InfoDialog from '../components/dialogs/InfoDialog';
+import { useState } from 'react';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -12,8 +13,22 @@ const styles = {
 		'p-1 my-1 border rounded border-slate-300 shadow-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:shadow-outline focus:outline-none',
 };
 
+const errorMessage = {
+	title: 'Fallo en el inicio de sesión',
+	body: 'Las credenciales no son correctas.',
+};
+
 const SignIn = () => {
+	const [openDialogs, setOpenDialogs] = useState({ err: false });
 	const navigate = useNavigate();
+
+	const openErr = () => {
+		setOpenDialogs({ ...openDialogs, err: true });
+	};
+
+	const closeErr = () => {
+		setOpenDialogs({ ...openDialogs, err: false });
+	};
 
 	const handleSubmit = (values) => {
 		API.post('login/', values)
@@ -24,14 +39,13 @@ const SignIn = () => {
 			})
 			.catch((err) => {
 				if (err.response.status === 401) {
-					alert('Usuario no registrado');
+					openErr();
 				}
 			});
 	};
 
 	return (
 		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3'>
-			<ErrorDialog />
 			<Formik
 				initialValues={{
 					email: '',
@@ -82,6 +96,7 @@ const SignIn = () => {
 					Registrarse
 				</Button>
 			</div>
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 		</div>
 	);
 };

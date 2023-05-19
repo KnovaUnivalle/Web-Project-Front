@@ -4,7 +4,7 @@ import { Button, FormGroup } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import API from '../../utils/API';
 import { useState } from 'react';
-import ErrorDialog from '../dialogs/ErrorDialog';
+import InfoDialog from '../dialogs/InfoDialog';
 
 const styles = {
 	errorMessage: 'text-red-700 font-serif rounded-sm',
@@ -12,14 +12,17 @@ const styles = {
 	field:
 		'p-1 my-1 border rounded border-slate-300 shadow-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:shadow-outline focus:outline-none',
 };
-
+const successMessage = {
+	title: 'Registro exitoso',
+	body: 'Ya puedes iniciar sesión.',
+};
 const errorMessage = {
 	title: 'Fallo en el registro',
 	body: 'El Correo ya se encuentra registrado.',
 };
 
 const SignUpUser = () => {
-	const [openDialogs, setOpenDialogs] = useState({ err: false, info: false });
+	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false });
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -30,12 +33,12 @@ const SignUpUser = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
 
-	const openInfo = () => {
-		setOpenDialogs({ ...openDialogs, info: true });
+	const openSuccess = () => {
+		setOpenDialogs({ ...openDialogs, success: true });
 	};
 
-	const closeInfo = () => {
-		setOpenDialogs({ ...openDialogs, info: false });
+	const closeSuccess = () => {
+		setOpenDialogs({ ...openDialogs, success: false });
 		navigate('/signin');
 	};
 
@@ -43,7 +46,7 @@ const SignUpUser = () => {
 		API.post('user/register/', values)
 			.then((response) => {
 				if (response.status === 201) {
-					navigate('/signin');
+					openSuccess();
 				}
 			})
 			.catch((err) => {
@@ -139,7 +142,8 @@ const SignUpUser = () => {
 					Iniciar Sesión
 				</Button>
 			</div>
-			<ErrorDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeSuccess} open={openDialogs.success} message={successMessage} />
 		</div>
 	);
 };
