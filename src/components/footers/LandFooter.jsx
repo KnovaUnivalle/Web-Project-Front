@@ -16,32 +16,30 @@ const socials = [
 
 const LandFooter = () => {
 	return (
-		<>
-			<footer id='contact' className='text-center mt-auto'>
-				<section className='flex justify-center pt-10 px-4 '>
-					<div className='lg:w-1/3'>
-						<Detective />
-						<p className='font-semibold'>
-							Encontramos los mejores precios para que usted no los tenga que buscar.
-						</p>
-						<div>
-							{socials.map((social) => {
-								return (
-									<IconButton key={`social${social.name}`} style={{ color: 'black' }}>
-										<a href={social.ref} target='_blank' rel='noreferrer'>
-											<Tooltip title={social.name}>{social.icon}</Tooltip>
-										</a>
-									</IconButton>
-								);
-							})}
-						</div>
+		<footer id='contact' className='text-center mt-auto'>
+			<section className='flex justify-center pt-10 px-4 '>
+				<div className='lg:w-1/3'>
+					<Detective />
+					<p className='font-semibold'>
+						Encontramos los mejores precios para que usted no los tenga que buscar.
+					</p>
+					<div>
+						{socials.map((social) => {
+							return (
+								<IconButton key={`social${social.name}`} style={{ color: 'black' }}>
+									<a href={social.ref} target='_blank' rel='noreferrer'>
+										<Tooltip title={social.name}>{social.icon}</Tooltip>
+									</a>
+								</IconButton>
+							);
+						})}
 					</div>
-				</section>
-				<p className=' bg-zinc-200 font-serif'>
-					Proyecto para el curso de aplicaciones en la web de la Universidad del Valle
-				</p>
-			</footer>
-		</>
+				</div>
+			</section>
+			<p className=' bg-zinc-200 font-serif'>
+				Proyecto para el curso de aplicaciones en la web de la Universidad del Valle
+			</p>
+		</footer>
 	);
 };
 

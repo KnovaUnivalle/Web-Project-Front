@@ -81,7 +81,7 @@ const SignIn = () => {
 				<Button style={{ color: '#6EB500' }} onClick={() => navigate(-1)}>
 					Regresar
 				</Button>
-				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/signup')}>
+				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/sign/up/customer')}>
 					Registrarse
 				</Button>
 			</div>

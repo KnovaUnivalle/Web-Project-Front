@@ -22,37 +22,35 @@ const Movil = ({ pages }) => {
 	};
 
 	return (
-		<>
-			<div className='md:hidden'>
-				<IconButton size='large' aria-controls='menu' aria-haspopup='true' onClick={handleOpenMenu}>
-					<MenuIcon fontSize='large' style={{ color: 'black' }} />
-				</IconButton>
-				<Menu
-					id='menu'
-					anchorEl={menu}
-					anchorOrigin={{
-						vertical: 'bottom',
-						horizontal: 'left',
-					}}
-					keepMounted
-					transformOrigin={{
-						vertical: 'top',
-						horizontal: 'left',
-					}}
-					open={Boolean(menu)}
-					onClose={handleCloseMenu}
-					sx={{
-						display: { xs: 'block', md: 'none' },
-					}}
-				>
-					{pages.map((page) => (
-						<MenuItem key={`menumovilitem${page.id}`} onClick={() => goPage(page.id)}>
-							{page.title}
-						</MenuItem>
-					))}
-				</Menu>
-			</div>
-		</>
+		<div className='md:hidden'>
+			<IconButton size='large' aria-controls='menu' aria-haspopup='true' onClick={handleOpenMenu}>
+				<MenuIcon fontSize='large' style={{ color: 'black' }} />
+			</IconButton>
+			<Menu
+				id='menu'
+				anchorEl={menu}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left',
+				}}
+				keepMounted
+				transformOrigin={{
+					vertical: 'top',
+					horizontal: 'left',
+				}}
+				open={Boolean(menu)}
+				onClose={handleCloseMenu}
+				sx={{
+					display: { xs: 'block', md: 'none' },
+				}}
+			>
+				{pages.map((page) => (
+					<MenuItem key={`menumovilitem${page.id}`} onClick={() => goPage(page.id)}>
+						{page.title}
+					</MenuItem>
+				))}
+			</Menu>
+		</div>
 	);
 };
 

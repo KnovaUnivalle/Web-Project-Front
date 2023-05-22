@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import SignUpUser from '../../components/forms/SignUpUser';
 import { useNavigate } from 'react-router-dom';
 
-const SignCustomer = () => {
+const SignManager = () => {
 	const navigate = useNavigate();
 
 	return (
@@ -20,4 +20,4 @@ const SignCustomer = () => {
 	);
 };
 
-export default SignCustomer;
+export default SignManager;
