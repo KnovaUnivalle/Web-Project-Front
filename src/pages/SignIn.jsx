@@ -1,17 +1,11 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { signInSchema } from '../schemas/signInSchema';
-import { Button, FormGroup } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import { useState } from 'react';
-
-const styles = {
-	errorMessage: 'text-red-700 font-serif rounded-sm',
-	formGroup: 'my-3 lg:my-1',
-	field:
-		'p-1 my-1 border rounded border-slate-300 shadow-sm focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:shadow-outline focus:outline-none',
-};
+import FormikInput from '../components/inputs/FormikInput';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -55,27 +49,22 @@ const SignIn = () => {
 				validationSchema={signInSchema}
 			>
 				<Form className='ring-4 shadow-xl rounded-xl ring-gray-400 p-10'>
-					<h1 className='text-center text-3xl font-semibold font-serif'>Inicio de sesión</h1>
-					<FormGroup className={styles.formGroup}>
-						<label htmlFor='email'>Correo Electronico: </label>
-						<Field
-							className={styles.field}
-							name='email'
-							placeholder='Escribe aquí tu correo'
-							type='email'
-						/>
-						<ErrorMessage name='email' component='div' className={styles.errorMessage} />
-					</FormGroup>
-					<FormGroup className={styles.formGroup}>
-						<label htmlFor='password'>Contraseña: </label>
-						<Field
-							className={styles.field}
-							name='password'
-							placeholder='Escribe aquí tu contraseña'
-							type='password'
-						/>
-						<ErrorMessage name='password' component='div' className={styles.errorMessage} />
-					</FormGroup>
+					<h1 className='text-center text-3xl font-semibold font-serif text-gray-500'>
+						Inicio de sesión
+					</h1>
+					<FormikInput
+						name='email'
+						type='email'
+						label='Correo Electronico'
+						placeholder='Correo Electronico'
+					/>
+					<FormikInput
+						name='password'
+						type='password'
+						label='Contraseña'
+						placeholder='Contraseña'
+					/>
+
 					<div className='flex justify-center'>
 						<Button
 							type='submit'
