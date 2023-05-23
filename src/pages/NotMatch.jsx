@@ -10,7 +10,7 @@ const NotMatch = () => {
 			<section>
 				<ul>
 					<li>
-						<Button style={{ color: '#6EB500' }} onClick={() => navigate('/home')}>
+						<Button sx={{ color: '#6EB500' }} onClick={() => navigate('/home')}>
 							Vuelve al Home
 						</Button>
 					</li>

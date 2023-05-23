@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Formik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { userSchema } from '../../schemas/signUpSchema';
@@ -18,6 +19,7 @@ const errorMessage = {
 
 const SignUpUser = ({ rol }) => {
 	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false });
+	const [activeButton, setActiveButton] = useState(true);
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -83,12 +85,26 @@ const SignUpUser = ({ rol }) => {
 					placeholder='Correo Electronico'
 				/>
 				<FormikInput name='password' type='password' label='Contraseña' placeholder='Contraseña' />
+				<div className='flex justify-center py-4'>
+					<ReCAPTCHA
+						sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY}
+						size={'compact'}
+						className=' mx-2'
+						onChange={() => {
+							setActiveButton(false);
+						}}
+						onExpired={() => {
+							setActiveButton(true);
+						}}
+					/>
+				</div>
 				<div className='flex justify-center'>
 					<Button
 						type='submit'
 						variant='contained'
 						disableElevation
-						style={{ background: '#6EB500', marginTop: '1rem' }}
+						disabled={activeButton}
+						sx={{ bgcolor: '#6EB500' }}
 					>
 						Crear Usuario
 					</Button>

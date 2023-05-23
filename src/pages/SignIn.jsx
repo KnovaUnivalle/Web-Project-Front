@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { Form, Formik } from 'formik';
-import { signInSchema } from '../schemas/signInSchema';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { signInSchema } from '../schemas/signInSchema';
 import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
-import { useState } from 'react';
 import FormikInput from '../components/inputs/FormikInput';
 
 const errorMessage = {
@@ -14,6 +15,7 @@ const errorMessage = {
 
 const SignIn = () => {
 	const [openDialogs, setOpenDialogs] = useState({ err: false });
+	const [activeButton, setActiveButton] = useState(true);
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -65,12 +67,27 @@ const SignIn = () => {
 						placeholder='Contraseña'
 					/>
 
+					<div className='flex justify-center py-4'>
+						<ReCAPTCHA
+							sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY}
+							size={'compact'}
+							className=' mx-2'
+							onChange={() => {
+								setActiveButton(false);
+							}}
+							onExpired={() => {
+								setActiveButton(true);
+							}}
+						/>
+					</div>
+
 					<div className='flex justify-center'>
 						<Button
 							type='submit'
 							variant='contained'
+							disabled={activeButton}
 							disableElevation
-							style={{ background: '#6EB500', marginTop: '1rem' }}
+							sx={{ bgcolor: '#6EB500' }}
 						>
 							Iniciar sesión
 						</Button>
@@ -78,10 +95,10 @@ const SignIn = () => {
 				</Form>
 			</Formik>
 			<div className='flex justify-between pt-3'>
-				<Button style={{ color: '#6EB500' }} onClick={() => navigate(-1)}>
+				<Button sx={{ color: '#6EB500' }} onClick={() => navigate(-1)}>
 					Regresar
 				</Button>
-				<Button style={{ color: '#6EB500' }} onClick={() => navigate('/sign/up/customer')}>
+				<Button sx={{ color: '#6EB500' }} onClick={() => navigate('/sign/up/customer')}>
 					Registrarse
 				</Button>
 			</div>
