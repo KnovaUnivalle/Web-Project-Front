@@ -1,9 +1,14 @@
 import { Button } from '@mui/material';
 import food from '../../assets/food.svg';
 import { useNavigate } from 'react-router-dom';
+import { HOME_PATH } from '../../utils/PATH';
 
 const Welcome = () => {
 	const navigate = useNavigate();
+
+	const navigateToHome = () => {
+		navigate(HOME_PATH);
+	};
 	return (
 		<section
 			id='welcome'
@@ -26,7 +31,7 @@ const Welcome = () => {
 					disableElevation
 					sx={{ marginTop: '1rem' }}
 					variant='contained'
-					onClick={() => navigate('/home')}
+					onClick={navigateToHome}
 				>
 					Comienza Ya!
 				</Button>

@@ -8,6 +8,7 @@ import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import FormikInput from '../components/inputs/FormikInput';
 import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
+import { HOME_PATH, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -39,7 +40,7 @@ const SignIn = () => {
 		API.post('login/', values)
 			.then((response) => {
 				if (response.status === 200) {
-					navigate('/home');
+					navigate(HOME_PATH);
 				}
 			})
 			.catch((err) => {
@@ -94,7 +95,7 @@ const SignIn = () => {
 			</Formik>
 			<div className='flex justify-between pt-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
-				<Button onClick={() => navigate('/sign/up/customer')}>Registrarse</Button>
+				<Button onClick={() => navigate(SIGN_UP_CUSTOMER_PATH)}>Registrarse</Button>
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 		</div>

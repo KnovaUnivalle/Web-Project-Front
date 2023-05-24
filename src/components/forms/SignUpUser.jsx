@@ -8,6 +8,7 @@ import API from '../../utils/API';
 import InfoDialog from '../dialogs/InfoDialog';
 import FormikInput from '../inputs/FormikInput';
 import { MODE_ENV, SITE_KEY_ENV } from '../../utils/ENV';
+import { SIGN_IN_PATH } from '../../utils/PATH';
 
 const successMessage = {
 	title: 'Registro exitoso',
@@ -37,7 +38,7 @@ const SignUpUser = ({ rol }) => {
 
 	const closeSuccess = () => {
 		setOpenDialogs({ ...openDialogs, success: false });
-		navigate('/signin');
+		navigate(SIGN_IN_PATH);
 	};
 
 	const activaButton = () => {

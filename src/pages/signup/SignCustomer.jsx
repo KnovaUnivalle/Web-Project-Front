@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
-import SignUpUser from '../../components/forms/SignUpUser';
 import { useNavigate } from 'react-router-dom';
+import SignUpUser from '../../components/forms/SignUpUser';
+import { SIGN_IN_PATH } from '../../utils/PATH';
 
 const SignCustomer = () => {
 	const navigate = useNavigate();
@@ -10,7 +11,7 @@ const SignCustomer = () => {
 			<SignUpUser rol={1} />
 			<div className='flex justify-between pt-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
-				<Button onClick={() => navigate('/sign/in')}>Iniciar Sesión</Button>
+				<Button onClick={() => navigate(SIGN_IN_PATH)}>Iniciar Sesión</Button>
 			</div>
 		</div>
 	);
