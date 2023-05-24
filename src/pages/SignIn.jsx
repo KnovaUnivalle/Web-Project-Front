@@ -7,6 +7,7 @@ import { signInSchema } from '../schemas/signInSchema';
 import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import FormikInput from '../components/inputs/FormikInput';
+import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -15,7 +16,7 @@ const errorMessage = {
 
 const SignIn = () => {
 	const [openDialogs, setOpenDialogs] = useState({ err: false });
-	const [activeButton, setActiveButton] = useState(true);
+	const [stateButton, setActiveButton] = useState(MODE_ENV);
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -24,6 +25,14 @@ const SignIn = () => {
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const activaButton = () => {
+		setActiveButton(false);
+	};
+
+	const disableButton = () => {
+		setActiveButton(true);
 	};
 
 	const handleSubmit = (values) => {
@@ -66,26 +75,21 @@ const SignIn = () => {
 						label='Contraseña'
 						placeholder='Contraseña'
 					/>
-
-					<div className='flex justify-center py-4'>
-						<ReCAPTCHA
-							sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY}
-							size={'compact'}
-							className=' mx-2'
-							onChange={() => {
-								setActiveButton(false);
-							}}
-							onExpired={() => {
-								setActiveButton(true);
-							}}
-						/>
-					</div>
-
-					<div className='flex justify-center'>
+					{MODE_ENV ? (
+						<div className='flex justify-center pt-4'>
+							<ReCAPTCHA
+								sitekey={SITE_KEY_ENV}
+								size={'compact'}
+								onChange={activaButton}
+								onExpired={disableButton}
+							/>
+						</div>
+					) : null}
+					<div className='flex justify-center pt-4'>
 						<Button
 							type='submit'
 							variant='contained'
-							disabled={activeButton}
+							disabled={stateButton}
 							disableElevation
 							sx={{ bgcolor: '#6EB500' }}
 						>

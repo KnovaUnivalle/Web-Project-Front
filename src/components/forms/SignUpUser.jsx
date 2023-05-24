@@ -7,6 +7,7 @@ import { userSchema } from '../../schemas/signUpSchema';
 import API from '../../utils/API';
 import InfoDialog from '../dialogs/InfoDialog';
 import FormikInput from '../inputs/FormikInput';
+import { MODE_ENV, SITE_KEY_ENV } from '../../utils/ENV';
 
 const successMessage = {
 	title: 'Registro exitoso',
@@ -19,7 +20,7 @@ const errorMessage = {
 
 const SignUpUser = ({ rol }) => {
 	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false });
-	const [activeButton, setActiveButton] = useState(true);
+	const [stateButton, setActiveButton] = useState(MODE_ENV);
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -37,6 +38,14 @@ const SignUpUser = ({ rol }) => {
 	const closeSuccess = () => {
 		setOpenDialogs({ ...openDialogs, success: false });
 		navigate('/signin');
+	};
+
+	const activaButton = () => {
+		setActiveButton(false);
+	};
+
+	const disableButton = () => {
+		setActiveButton(true);
 	};
 
 	const handleSubmit = async (values) => {
@@ -85,25 +94,22 @@ const SignUpUser = ({ rol }) => {
 					placeholder='Correo Electronico'
 				/>
 				<FormikInput name='password' type='password' label='Contraseña' placeholder='Contraseña' />
-				<div className='flex justify-center py-4'>
-					<ReCAPTCHA
-						sitekey={import.meta.env.VITE_REACT_APP_SITE_KEY}
-						size={'compact'}
-						className=' mx-2'
-						onChange={() => {
-							setActiveButton(false);
-						}}
-						onExpired={() => {
-							setActiveButton(true);
-						}}
-					/>
-				</div>
-				<div className='flex justify-center'>
+				{MODE_ENV ? (
+					<div className='flex justify-center pt-4'>
+						<ReCAPTCHA
+							sitekey={SITE_KEY_ENV}
+							size={'compact'}
+							onChange={activaButton}
+							onExpired={disableButton}
+						/>
+					</div>
+				) : null}
+				<div className='flex justify-center pt-4'>
 					<Button
 						type='submit'
 						variant='contained'
 						disableElevation
-						disabled={activeButton}
+						disabled={stateButton}
 						sx={{ bgcolor: '#6EB500' }}
 					>
 						Crear Usuario
