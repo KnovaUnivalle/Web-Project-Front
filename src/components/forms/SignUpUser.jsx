@@ -105,13 +105,7 @@ const SignUpUser = ({ rol }) => {
 					</div>
 				) : null}
 				<div className='flex justify-center pt-4'>
-					<Button
-						type='submit'
-						variant='contained'
-						disableElevation
-						disabled={stateButton}
-						sx={{ bgcolor: '#6EB500' }}
-					>
+					<Button type='submit' variant='contained' disableElevation disabled={stateButton}>
 						Crear Usuario
 					</Button>
 				</div>

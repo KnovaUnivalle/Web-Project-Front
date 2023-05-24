@@ -24,7 +24,7 @@ const Welcome = () => {
 				</p>
 				<Button
 					disableElevation
-					sx={{ background: '#6EB500', marginTop: '1rem' }}
+					sx={{ marginTop: '1rem' }}
 					variant='contained'
 					onClick={() => navigate('/home')}
 				>

@@ -86,25 +86,15 @@ const SignIn = () => {
 						</div>
 					) : null}
 					<div className='flex justify-center pt-4'>
-						<Button
-							type='submit'
-							variant='contained'
-							disabled={stateButton}
-							disableElevation
-							sx={{ bgcolor: '#6EB500' }}
-						>
+						<Button type='submit' variant='contained' disabled={stateButton} disableElevation>
 							Iniciar sesión
 						</Button>
 					</div>
 				</Form>
 			</Formik>
 			<div className='flex justify-between pt-3'>
-				<Button sx={{ color: '#6EB500' }} onClick={() => navigate(-1)}>
-					Regresar
-				</Button>
-				<Button sx={{ color: '#6EB500' }} onClick={() => navigate('/sign/up/customer')}>
-					Registrarse
-				</Button>
+				<Button onClick={() => navigate(-1)}>Regresar</Button>
+				<Button onClick={() => navigate('/sign/up/customer')}>Registrarse</Button>
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 		</div>
