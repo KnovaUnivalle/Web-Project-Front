@@ -5,14 +5,12 @@ import Welcome from '../sections/Welcome';
 
 const LandMain = () => {
 	return (
-		<>
-			<main>
-				<Welcome />
-				<Service />
-				<Statement />
-				<Team />
-			</main>
-		</>
+		<main>
+			<Welcome />
+			<Service />
+			<Statement />
+			<Team />
+		</main>
 	);
 };
 

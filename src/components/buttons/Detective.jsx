@@ -1,11 +1,12 @@
-const Detective = ({ url = '/' }) => {
+import { Link } from 'react-router-dom';
+import { HOME_PATH } from '../../utils/PATH';
+
+const Detective = () => {
 	return (
-		<>
-			<a className='flex flex-row justify-center' href='/'>
-				<img className='w-12 p-1' src='logo.svg' alt='Logo de Detective' />
-				<img className='w-20' src='logo_letter.svg' alt='Detective' />
-			</a>
-		</>
+		<Link className='flex flex-row justify-center' to={HOME_PATH}>
+			<img className='w-12 p-1' src='/logo.svg' alt='Logo de Detective' />
+			<img className='w-20' src='/logo_letter.svg' alt='Detective' />
+		</Link>
 	);
 };
 
