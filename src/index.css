@@ -6,7 +6,6 @@
 @layer base {
   html {
     @apply scroll-smooth;
-    @apply bg-softgrey;
     @apply overflow-y-scroll
   }
 }

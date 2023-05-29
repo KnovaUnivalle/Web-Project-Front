@@ -10,14 +10,17 @@ import {
 	IconButton,
 	Divider,
 	CssBaseline,
+	Tooltip,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useState } from 'react';
 import { AppBar, Drawer, DrawerHeader } from './UtilsOperations';
+import { useNavigate } from 'react-router-dom';
 
 const NavBarOperations = ({ title = 'Drawer', body, menus, ...props }) => {
 	const [open, setOpen] = useState(false);
+	const navigate = useNavigate();
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -59,24 +62,27 @@ const NavBarOperations = ({ title = 'Drawer', body, menus, ...props }) => {
 				<List>
 					{menus.map((menu) => (
 						<ListItem key={`navOperations${menu.title}`} disablePadding sx={{ display: 'block' }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5,
-								}}
-							>
-								<ListItemIcon
+							<Tooltip title={menu.title} placement='right'>
+								<ListItemButton
 									sx={{
-										minWidth: 0,
-										mr: open ? 2 : 'auto',
-										justifyContent: 'center',
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
 									}}
+									onClick={() => navigate(menu.url)}
 								>
-									{menu.icon}
-								</ListItemIcon>
-								<ListItemText primary={menu.title} sx={{ opacity: open ? 1 : 0 }} />
-							</ListItemButton>
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: open ? 2 : 'auto',
+											justifyContent: 'center',
+										}}
+									>
+										{menu.icon}
+									</ListItemIcon>
+									<ListItemText primary={menu.title} sx={{ opacity: open ? 1 : 0 }} />
+								</ListItemButton>
+							</Tooltip>
 							{menu.divider ? <Divider /> : null}
 						</ListItem>
 					))}

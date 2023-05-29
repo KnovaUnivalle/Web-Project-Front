@@ -5,14 +5,32 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
+import {
+	ADD_USER_ADMIN_PATH,
+	ADMIN_HOME_PATH,
+	EDIT_USER_ADMIN_PATH,
+	GRAPHICS_ADMIN_PATH,
+	SIGN_OUT_PATH,
+	USERS_ADMIN_PATH,
+} from '../utils/PATH';
 
 const menus = [
-	{ title: 'Inicio', icon: <HomeIcon />, url: '', divider: true },
-	{ title: 'Usuarios', icon: <PersonIcon />, url: '', divider: false },
-	{ title: 'Agregar Usuario', icon: <PersonAddAlt1Icon />, url: '', divider: false },
-	{ title: 'Modificar Usuario', icon: <ManageAccountsIcon />, url: '', divider: true },
-	{ title: 'Gráficos', icon: <BarChartIcon />, url: '', divider: true },
-	{ title: 'Cerrar Sesión', icon: <LogoutIcon />, url: '', divider: true },
+	{ title: 'Inicio', icon: <HomeIcon />, url: ADMIN_HOME_PATH, divider: true },
+	{ title: 'Usuarios', icon: <PersonIcon />, url: USERS_ADMIN_PATH, divider: false },
+	{
+		title: 'Agregar Usuario',
+		icon: <PersonAddAlt1Icon />,
+		url: ADD_USER_ADMIN_PATH,
+		divider: false,
+	},
+	{
+		title: 'Modificar Usuario',
+		icon: <ManageAccountsIcon />,
+		url: EDIT_USER_ADMIN_PATH,
+		divider: true,
+	},
+	{ title: 'Gráficos', icon: <BarChartIcon />, url: GRAPHICS_ADMIN_PATH, divider: true },
+	{ title: 'Cerrar Sesión', icon: <LogoutIcon />, url: SIGN_OUT_PATH, divider: true },
 ];
 
 const Admin = () => {

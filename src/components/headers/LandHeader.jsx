@@ -19,7 +19,7 @@ const pages = [
 
 const LandHeader = () => {
 	return (
-		<header className='bg-softgrey px-3 pt-3 sm:pt-7 lg:px-12 '>
+		<header className=' px-3 pt-3 sm:pt-7 lg:px-12 '>
 			<nav className='flex justify-between'>
 				<Detective />
 				<Movil pages={pages} />

@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { HOME_PATH } from '../utils/PATH';
 
 const NotMatch = () => {
 	const navigate = useNavigate();
@@ -10,9 +11,10 @@ const NotMatch = () => {
 			<section>
 				<ul>
 					<li>
-						<Button sx={{ color: '#6EB500' }} onClick={() => navigate('/home')}>
-							Vuelve al Home
-						</Button>
+						<Button onClick={() => navigate(HOME_PATH)}>Vuelve al Home</Button>
+					</li>
+					<li>
+						<Button onClick={() => navigate(-1)}>Vuelve atrás</Button>
 					</li>
 				</ul>
 			</section>
