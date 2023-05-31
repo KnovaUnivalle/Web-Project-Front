@@ -1,4 +1,4 @@
-const users = [
+const defaultUsers = [
 	{
 		nombre: 'Jose Cardenas',
 		correo: 'jose.cardenas@correounivalle.edu.co',
@@ -25,20 +25,20 @@ const users = [
 	},
 ];
 
-const Users = () => {
+const Users = ({ users = defaultUsers }) => {
 	return (
-		<section className='w-full py-4 h-96 flex flex-col'>
+		<section className='w-full py-4 h-96 flex flex-col lg:h-80'>
 			<h1 className='text-xl font-bold font-serif lg:text-2xl py-1'>
 				Últimos usuarios registrados
 			</h1>
-			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>
-				<table className='table-auto  w-full'>
+			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full '>
+				<table className='table-auto  w-full '>
 					<thead className='border-b'>
 						<tr className='bg-gray-100'>
-							<th className='text-left p-3 font-medium'>Nombre</th>
-							<th className='text-left p-3 font-medium'>Correo</th>
-							<th className='text-left p-3 font-medium'>Activo</th>
-							<th className='text-left p-3 font-medium'>Tipo de usuario</th>
+							<th className='text-left p-3'>Nombre</th>
+							<th className='text-left p-3'>Correo</th>
+							<th className='text-left p-3'>Activo</th>
+							<th className='text-left p-3'>Tipo de usuario</th>
 						</tr>
 					</thead>
 					<tbody>

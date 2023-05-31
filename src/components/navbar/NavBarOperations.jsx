@@ -88,7 +88,7 @@ const NavBarOperations = ({ title = 'Drawer', body, menus, ...props }) => {
 					))}
 				</List>
 			</Drawer>
-			<main component='main' className=' flex-grow p-4 w-3/4'>
+			<main component='main' className='flex-grow p-4 w-3/4'>
 				<DrawerHeader />
 				{body}
 			</main>
