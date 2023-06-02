@@ -13,6 +13,7 @@ import {
 	SIGN_OUT_PATH,
 	USERS_ADMIN_PATH,
 } from '../utils/PATH';
+import AdminRouter from '../routes/AdminRouter';
 
 const menus = [
 	{ title: 'Inicio', icon: <HomeIcon />, url: ADMIN_HOME_PATH, divider: true },
@@ -34,7 +35,7 @@ const menus = [
 ];
 
 const Admin = () => {
-	return <NavBarOperations body={<div> Admin</div>} menus={menus} title='Administrador' />;
+	return <NavBarOperations body={<AdminRouter />} menus={menus} title='Administrador' />;
 };
 
 export default Admin;

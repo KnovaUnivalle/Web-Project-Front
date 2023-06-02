@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import {
 	LineChart,
 	Line,
@@ -12,34 +14,36 @@ import {
 const defaultData = [
 	{
 		name: 'Mañana',
-		uv: 4000,
 		pv: 2400,
-		amt: 2400,
 	},
 	{
 		name: 'Medio Día',
-		uv: 3000,
 		pv: 1398,
-		amt: 2210,
 	},
 	{
 		name: 'Tarde',
-		uv: 2000,
 		pv: 9800,
-		amt: 2290,
 	},
 	{
 		name: 'Noche',
-		uv: 2780,
 		pv: 3908,
-		amt: 2000,
 	},
 ];
 
-const CustomLineChart = ({ data = defaultData }) => {
+const CustomLineChart = ({ data = defaultData, to = '/', title = 'LineChart' }) => {
+	const navigate = useNavigate();
 	return (
-		<section className='py-4'>
-			<h1 className='text-xl font-bold font-serif lg:text-2xl py-1'>Consultas Hoy</h1>
+		<section className='py-3'>
+			<div className=' flex justify-between pb-1'>
+				<h1 className='text-xl font-bold font-serif lg:text-2xl py-1'> {title}</h1>
+				<Button
+					variant='contained'
+					sx={{ height: '1.8rem', marginTop: 'auto', marginBottom: 'auto' }}
+					onClick={() => navigate(to)}
+				>
+					Más
+				</Button>
+			</div>
 			<div className='border-x border-t shadow-md w-full h-96 lg:h-80'>
 				<ResponsiveContainer>
 					<LineChart
@@ -56,8 +60,13 @@ const CustomLineChart = ({ data = defaultData }) => {
 						<YAxis />
 						<Tooltip />
 						<Legend />
-						<Line type='monotone' dataKey='pv' stroke='#8884d8' activeDot={{ r: 8 }} />
-						<Line type='monotone' dataKey='uv' stroke='#82ca9d' />
+						<Line
+							type='monotone'
+							dataKey='pv'
+							stroke='#8884d8'
+							strokeWidth={2}
+							activeDot={{ r: 8 }}
+						/>
 					</LineChart>
 				</ResponsiveContainer>
 			</div>
