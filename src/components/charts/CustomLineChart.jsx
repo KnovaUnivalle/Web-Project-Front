@@ -34,17 +34,13 @@ const CustomLineChart = ({ data = defaultData, to = '/', title = 'LineChart' }) 
 	const navigate = useNavigate();
 	return (
 		<section className='py-3'>
-			<div className=' flex justify-between py-2'>
-				<h1 className='text-xl font-bold font-serif lg:text-2xl'> {title}</h1>
-				<Button
-					variant='contained'
-					sx={{ height: '1.7rem', marginTop: 'auto', marginBottom: 'auto' }}
-					onClick={() => navigate(to)}
-				>
-					Más
+			<div className=' flex justify-between py-1'>
+				<h2 className='text-xl font-bold font-serif lg:text-2xl'> {title}</h2>
+				<Button onClick={() => navigate(to)}>
+					<p className='text-lg font-semibold '>Más</p>
 				</Button>
 			</div>
-			<div className='border-x border-t shadow-md w-full h-96 p-3 lg:h-80 '>
+			<div className='border-x border-t shadow-md w-full h-96 p-3 lg:h-80'>
 				<ResponsiveContainer>
 					<LineChart
 						data={data}

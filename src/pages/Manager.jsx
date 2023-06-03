@@ -16,7 +16,7 @@ const menus = [
 	{ title: 'Inicio', icon: <HomeIcon />, url: MANAGER_HOME_PATH, divider: true },
 	{ title: 'Usuarios', icon: <PersonIcon />, url: USERS_MANAGER_PATH, divider: true },
 	{ title: 'Noticias', icon: <NewspaperIcon />, url: GRAPHICS_MANAGER_PATH, divider: true },
-	{ title: 'Gráficos', icon: <BarChartIcon />, url: GRAPHICS_MANAGER_PATH, divider: true },
+	{ title: 'Reportes', icon: <BarChartIcon />, url: GRAPHICS_MANAGER_PATH, divider: true },
 	{ title: 'Cerrar Sesión', icon: <LogoutIcon />, url: SIGN_OUT_PATH, divider: true },
 ];
 

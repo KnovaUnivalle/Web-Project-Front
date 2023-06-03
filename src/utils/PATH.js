@@ -28,8 +28,8 @@ export const ADD_USER_ADMIN_PATH = '/admin/new';
 export const ADD_USER_ADMIN_AS_PATH = '/new';
 export const EDIT_USER_ADMIN__AS_PATH = '/edit';
 export const EDIT_USER_ADMIN_PATH = '/admin/edit';
-export const GRAPHICS_ADMIN_PATH = '/admin/graph';
-export const GRAPHICS_ADMIN_AS_PATH = '/graph';
+export const GRAPHICS_ADMIN_PATH = '/admin/report';
+export const GRAPHICS_ADMIN_AS_PATH = '/report';
 
 // Manager Router
 
@@ -37,5 +37,5 @@ export const USERS_MANAGER_PATH = '/manager/users';
 export const USERS_MANAGER_AS_PATH = '/users';
 export const NEWS_MANAGER_PATH = '/manager/news';
 export const NEWS_MANAGER_AS_PATH = '/news';
-export const GRAPHICS_MANAGER_PATH = '/manager/graph';
-export const GRAPHICS_MANAGER_AS_PATH = '/graph';
+export const GRAPHICS_MANAGER_PATH = '/manager/report';
+export const GRAPHICS_MANAGER_AS_PATH = '/report';

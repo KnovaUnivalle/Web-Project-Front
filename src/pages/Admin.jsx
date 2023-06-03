@@ -30,7 +30,7 @@ const menus = [
 		url: EDIT_USER_ADMIN_PATH,
 		divider: true,
 	},
-	{ title: 'Gráficos', icon: <BarChartIcon />, url: GRAPHICS_ADMIN_PATH, divider: true },
+	{ title: 'Reportes', icon: <BarChartIcon />, url: GRAPHICS_ADMIN_PATH, divider: true },
 	{ title: 'Cerrar Sesión', icon: <LogoutIcon />, url: SIGN_OUT_PATH, divider: true },
 ];
 

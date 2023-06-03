@@ -34,14 +34,10 @@ const Users = ({ users = defaultUsers }) => {
 
 	return (
 		<section className='w-full py-3 h-96 flex flex-col lg:h-80'>
-			<div className=' flex justify-between py-2'>
-				<h1 className='text-xl font-bold font-serif lg:text-2xl'>Últimos usuarios registrados</h1>
-				<Button
-					variant='contained'
-					sx={{ height: '1.7rem', marginTop: 'auto', marginBottom: 'auto' }}
-					onClick={() => navigate(USERS_ADMIN_PATH)}
-				>
-					Más
+			<div className=' flex justify-between py-1'>
+				<h2 className='text-xl font-bold font-serif lg:text-2xl'>Últimos usuarios registrados</h2>
+				<Button onClick={() => navigate(to)}>
+					<p className='text-lg font-semibold '>Más</p>
 				</Button>
 			</div>
 			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>
