@@ -34,20 +34,18 @@ const Users = ({ users = defaultUsers }) => {
 
 	return (
 		<section className='w-full py-3 h-96 flex flex-col lg:h-80'>
-			<div className=' flex justify-between pb-1'>
-				<h1 className='text-xl font-bold font-serif lg:text-2xl py-1'>
-					Últimos usuarios registrados
-				</h1>
+			<div className=' flex justify-between py-2'>
+				<h1 className='text-xl font-bold font-serif lg:text-2xl'>Últimos usuarios registrados</h1>
 				<Button
 					variant='contained'
-					sx={{ height: '1.8rem', marginTop: 'auto', marginBottom: 'auto' }}
+					sx={{ height: '1.7rem', marginTop: 'auto', marginBottom: 'auto' }}
 					onClick={() => navigate(USERS_ADMIN_PATH)}
 				>
 					Más
 				</Button>
 			</div>
-			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full '>
-				<table className='table-auto  w-full '>
+			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>
+				<table className='table-auto  w-full'>
 					<thead className='border-b'>
 						<tr className='bg-gray-100'>
 							<th className='text-left p-3'>Nombre</th>

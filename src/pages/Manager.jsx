@@ -10,6 +10,7 @@ import {
 	SIGN_OUT_PATH,
 	USERS_MANAGER_PATH,
 } from '../utils/PATH';
+import ManagerRouter from '../routes/ManagerRouter';
 
 const menus = [
 	{ title: 'Inicio', icon: <HomeIcon />, url: MANAGER_HOME_PATH, divider: true },
@@ -20,7 +21,7 @@ const menus = [
 ];
 
 const Manager = () => {
-	return <NavBarOperations body={<div>Manager</div>} menus={menus} title='Administrador' />;
+	return <NavBarOperations body={<ManagerRouter />} menus={menus} title='Administrador' />;
 };
 
 export default Manager;
