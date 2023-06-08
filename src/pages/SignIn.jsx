@@ -3,6 +3,7 @@ import { Form, Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { signInSchema } from '../schemas/signInSchema';
 import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
@@ -36,8 +37,8 @@ const SignIn = () => {
 		setActiveButton(true);
 	};
 
-	const handleSubmit = (values) => {
-		API.post('login/', values)
+	const handleSubmit = (data) => {
+		API.post('login/', data)
 			.then((response) => {
 				if (response.status === 200) {
 					navigate(HOME_PATH);
@@ -50,8 +51,24 @@ const SignIn = () => {
 			});
 	};
 
+	const onSuccessGoogle = (credentialResponse) => {
+		const data = { auth_token: credentialResponse.credential };
+		API.post('google/', data)
+			.then((response) => {
+				if (response.status === 200) {
+					console.log('success');
+				}
+			})
+			.catch((err) => {
+				if (err.response.status === 401) {
+					console.log('error');
+				}
+				console.log(err);
+			});
+	};
+
 	return (
-		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3'>
+		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3 xl:w-1/4'>
 			<Formik
 				initialValues={{
 					email: '',
@@ -86,10 +103,21 @@ const SignIn = () => {
 							/>
 						</div>
 					) : null}
-					<div className='flex justify-center pt-4'>
+					<div className='flex flex-col md:flex-row justify-between gap-3 py-4'>
 						<Button type='submit' variant='contained' disabled={stateButton} disableElevation>
 							Iniciar sesión
 						</Button>
+						<div className='flex justify-center'>
+							<GoogleLogin
+								text='signin'
+								onSuccess={(credentialResponse) => {
+									onSuccessGoogle(credentialResponse);
+								}}
+								onError={() => {
+									console.log('Login Failed');
+								}}
+							/>
+						</div>
 					</div>
 				</Form>
 			</Formik>
