@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Form, Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { signInSchema } from '../schemas/signInSchema';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import FormikInput from '../components/inputs/FormikInput';
 import GoogleAuth from '../components/buttons/GoogleAuth';
 import API from '../utils/API';
 import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
-import { HOME_PATH, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
+import { HOME_PATHS, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
+import { useAuth } from '../hooks/useAuth';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -22,9 +23,18 @@ const errorGeneralMessage = {
 };
 
 const SignIn = () => {
+	const { token, rol, login } = useAuth();
+	if (token) {
+		return <Navigate to={HOME_PATHS[rol]} />;
+	}
+	const navigate = useNavigate();
 	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
 	const [stateButton, setActiveButton] = useState(MODE_ENV);
-	const navigate = useNavigate();
+
+	const successNavigate = (data) => {
+		const { access, rol_id } = data;
+		login(access, rol_id, navigate(HOME_PATHS[rol_id]));
+	};
 
 	const openErr = () => {
 		setOpenDialogs({ ...openDialogs, err: true });
@@ -54,7 +64,7 @@ const SignIn = () => {
 		API.post('login/', data)
 			.then((response) => {
 				if (response.status === 200) {
-					navigate(HOME_PATH);
+					successNavigate(response.data);
 				}
 			})
 			.catch((err) => {
@@ -71,7 +81,7 @@ const SignIn = () => {
 		API.post('google/', data)
 			.then((response) => {
 				if (response.status === 200) {
-					navigate(HOME_PATH);
+					successNavigate(response.data);
 				}
 			})
 			.catch((err) => {

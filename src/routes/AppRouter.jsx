@@ -24,8 +24,6 @@ const AppRoutes = () => {
 				<Route path={HOME_AS_PATH} element={<Customer />} />
 				<Route path={MANAGER_HOME_AS_PATH} element={<Manager />} />
 				<Route path={ADMIN_HOME_AS_PATH} element={<Admin />} />
-				//
-				<Route path={'/load'} element={<Loading />} />
 			</Routes>
 		</Suspense>
 	);

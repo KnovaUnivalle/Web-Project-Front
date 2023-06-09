@@ -8,6 +8,7 @@ export const MANAGER_HOME_PATH = '/manager';
 export const MANAGER_HOME_AS_PATH = 'manager/*';
 export const ADMIN_HOME_PATH = '/admin';
 export const ADMIN_HOME_AS_PATH = 'admin/*';
+export const HOME_PATHS = [ADMIN_HOME_PATH, HOME_PATH, MANAGER_HOME_PATH];
 
 // Land Router
 export const LAND_TEAM_PATH = '/team';
@@ -39,3 +40,4 @@ export const NEWS_MANAGER_PATH = '/manager/news';
 export const NEWS_MANAGER_AS_PATH = '/news';
 export const GRAPHICS_MANAGER_PATH = '/manager/report';
 export const GRAPHICS_MANAGER_AS_PATH = '/report';
+
