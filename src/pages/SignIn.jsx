@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
 import { signInSchema } from '../schemas/signInSchema';
-import API from '../utils/API';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import FormikInput from '../components/inputs/FormikInput';
+import GoogleAuth from '../components/buttons/GoogleAuth';
+import API from '../utils/API';
 import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 import { HOME_PATH, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 
@@ -16,8 +16,13 @@ const errorMessage = {
 	body: 'Las credenciales no son correctas.',
 };
 
+const errorGeneralMessage = {
+	title: 'Error en el inicio de sesión',
+	body: 'Revisa tu conexión e intenta nuevamente',
+};
+
 const SignIn = () => {
-	const [openDialogs, setOpenDialogs] = useState({ err: false });
+	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
 	const [stateButton, setActiveButton] = useState(MODE_ENV);
 	const navigate = useNavigate();
 
@@ -27,6 +32,14 @@ const SignIn = () => {
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const openErrGen = () => {
+		setOpenDialogs({ ...openDialogs, errGen: true });
+	};
+
+	const closeErrGen = () => {
+		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
 	const activaButton = () => {
@@ -45,8 +58,10 @@ const SignIn = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
+				if (err.response && err.response.status === 401) {
 					openErr();
+				} else {
+					openErrGen();
 				}
 			});
 	};
@@ -56,14 +71,11 @@ const SignIn = () => {
 		API.post('google/', data)
 			.then((response) => {
 				if (response.status === 200) {
-					console.log('success');
+					navigate(HOME_PATH);
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
-					console.log('error');
-				}
-				console.log(err);
+				openErrGen();
 			});
 	};
 
@@ -107,17 +119,7 @@ const SignIn = () => {
 						<Button type='submit' variant='contained' disabled={stateButton} disableElevation>
 							Iniciar sesión
 						</Button>
-						<div className='flex justify-center'>
-							<GoogleLogin
-								text='signin'
-								onSuccess={(credentialResponse) => {
-									onSuccessGoogle(credentialResponse);
-								}}
-								onError={() => {
-									console.log('Login Failed');
-								}}
-							/>
-						</div>
+						<GoogleAuth onSuccess={onSuccessGoogle} />
 					</div>
 				</Form>
 			</Formik>
@@ -126,6 +128,7 @@ const SignIn = () => {
 				<Button onClick={() => navigate(SIGN_UP_CUSTOMER_PATH)}>Registrarse</Button>
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
 		</div>
 	);
 };
