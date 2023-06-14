@@ -6,11 +6,11 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { signInSchema } from '../schemas/signInSchema';
 import InfoDialog from '../components/dialogs/InfoDialog';
 import FormikInput from '../components/inputs/FormikInput';
-import GoogleAuth from '../components/buttons/GoogleAuth';
 import API from '../utils/API';
 import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 import { HOME_PATHS, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 import { useAuth } from '../hooks/useAuth';
+import { GoogleLogin } from '@react-oauth/google';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -90,7 +90,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3 xl:w-1/4'>
+		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3 xl:w-1/3'>
 			<Formik
 				initialValues={{
 					email: '',
@@ -125,11 +125,18 @@ const SignIn = () => {
 							/>
 						</div>
 					) : null}
-					<div className='flex flex-col md:flex-row justify-between gap-3 py-4'>
+					<div className='flex flex-col gap-3 py-4 mx-2 md:mx-28 lg:mx-6 xl:mx-20 2xl:mx-28'>
 						<Button type='submit' variant='contained' disabled={stateButton} disableElevation>
 							Iniciar sesión
 						</Button>
-						<GoogleAuth onSuccess={onSuccessGoogle} />
+						<div className='flex justify-center'>
+							<GoogleLogin
+								size='medium'
+								onSuccess={(credentialResponse) => {
+									onSuccessGoogle(credentialResponse);
+								}}
+							/>
+						</div>
 					</div>
 				</Form>
 			</Formik>
