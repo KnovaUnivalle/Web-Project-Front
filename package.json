@@ -8,7 +8,7 @@
     "build": "vite build",
     "format": "rome format . --write",
     "preview": "vite preview",
-    "start": "serve dist -s -n -L -p $PORT"
+    "start": "npx http-server ./dist"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
