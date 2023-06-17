@@ -19,8 +19,13 @@ const errorMessage = {
 	body: 'El Correo ya se encuentra registrado.',
 };
 
+const errorGeneralMessage = {
+	title: 'Error en el inicio de sesión',
+	body: 'Revisa tu conexión e intenta nuevamente',
+};
+
 const SignUpUser = ({ rol }) => {
-	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false });
+	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false, errGen: false });
 	const [stateButton, setActiveButton] = useState(MODE_ENV);
 	const navigate = useNavigate();
 
@@ -41,6 +46,14 @@ const SignUpUser = ({ rol }) => {
 		navigate(SIGN_IN_PATH);
 	};
 
+	const openErrGen = () => {
+		setOpenDialogs({ ...openDialogs, errGen: true });
+	};
+
+	const closeErrGen = () => {
+		setOpenDialogs({ ...openDialogs, errGen: false });
+	};
+
 	const activaButton = () => {
 		setActiveButton(false);
 	};
@@ -49,7 +62,7 @@ const SignUpUser = ({ rol }) => {
 		setActiveButton(true);
 	};
 
-	const handleSubmit = async (values) => {
+	const handleSubmit = (values) => {
 		API.post('user/register/', values)
 			.then((response) => {
 				if (response.status === 201) {
@@ -57,8 +70,10 @@ const SignUpUser = ({ rol }) => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 400) {
+				if (err.response && err.response.status === 400) {
 					openErr();
+				} else {
+					openErrGen();
 				}
 			});
 	};
@@ -112,6 +127,7 @@ const SignUpUser = ({ rol }) => {
 				</div>
 				<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 				<InfoDialog close={closeSuccess} open={openDialogs.success} message={successMessage} />
+				<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
 			</Form>
 		</Formik>
 	);

@@ -7,13 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "format": "rome format . --write",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npx http-server ./dist"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.3",
+    "@react-oauth/google": "^0.11.0",
     "axios": "^1.4.0",
     "formik": "^2.2.9",
     "react": "^18.2.0",

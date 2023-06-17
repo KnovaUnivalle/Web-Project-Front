@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { LAND_SERVICE_PATH, LAND_TEAM_PATH } from '../utils/PATH';
+import Loading from '../pages/Loading';
 const NotMatch = lazy(() => import('../pages/NotMatch'));
 const Team = lazy(() => import('../components/sections/Team'));
 const Service = lazy(() => import('../components/sections/Service'));
@@ -9,7 +10,7 @@ const LandMain = lazy(() => import('../components/main/LandMain'));
 
 const LandRouter = () => {
 	return (
-		<Suspense fallback={<div>Cargando</div>}>
+		<Suspense fallback={<Loading />}>
 			<Routes>
 				<Route path='*' element={<NotMatch />} />
 				<Route path='/' element={<LandMain />} />

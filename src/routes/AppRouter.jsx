@@ -8,6 +8,7 @@ import {
 	ADMIN_HOME_AS_PATH,
 	MANAGER_HOME_AS_PATH,
 } from '../utils/PATH';
+import Loading from '../pages/Loading';
 const Customer = lazy(() => import('../pages/Customer'));
 const LandingPage = lazy(() => import('../pages/LandingPage'));
 const Manager = lazy(() => import('../pages/Manager'));
@@ -16,7 +17,7 @@ const SignRouter = lazy(() => import('./SignRouter'));
 
 const AppRoutes = () => {
 	return (
-		<Suspense fallback={<div>Cargando</div>}>
+		<Suspense fallback={<Loading />}>
 			<Routes>
 				<Route path={LANDING_PAGE_AS_PATH} element={<LandingPage />} />
 				<Route path={SIGN_AS_PATH} element={<SignRouter />} />
