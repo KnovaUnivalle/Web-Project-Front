@@ -5,7 +5,7 @@ export default {
 		extend: {
 			colors: {
 				softlime: '#6EB500',
-				softblue: '#104BA9',
+				softblue: '#127ebb',
 				softorange: '#FFA200',
 				softgrey: '#f7f7f7',
 			},

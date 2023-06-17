@@ -29,14 +29,14 @@ const defaultUsers = [
 	},
 ];
 
-const Users = ({ users = defaultUsers }) => {
+const Users = ({ dataUsers = defaultUsers }) => {
 	const navigate = useNavigate();
 
 	return (
 		<section className='w-full py-3 h-96 flex flex-col lg:h-80'>
 			<div className=' flex justify-between py-1'>
 				<h2 className='text-xl font-bold font-serif lg:text-2xl'>Últimos usuarios registrados</h2>
-				<Button onClick={() => navigate(to)}>
+				<Button onClick={() => navigate(USERS_ADMIN_PATH)}>
 					<p className='text-lg font-semibold '>Más</p>
 				</Button>
 			</div>
@@ -51,12 +51,12 @@ const Users = ({ users = defaultUsers }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{users.map((user) => (
-							<tr className='border-b hover:bg-gray-50' key={`row${user.correo}`}>
-								<td className='p-3'>{user.nombre}</td>
-								<td className='p-3'>{user.correo}</td>
-								<td className='p-3'>{user.activo}</td>
-								<td className='p-3'>{user.tipo}</td>
+						{dataUsers.map((dataUser) => (
+							<tr className='border-b hover:bg-gray-50' key={`row${dataUser.correo}`}>
+								<td className='p-3'>{dataUser.nombre}</td>
+								<td className='p-3'>{dataUser.correo}</td>
+								<td className='p-3'>{dataUser.activo}</td>
+								<td className='p-3'>{dataUser.tipo}</td>
 							</tr>
 						))}
 					</tbody>
