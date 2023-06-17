@@ -58,7 +58,7 @@ const NavBarOperations = ({ title = 'Drawer', body, menus, ...props }) => {
 						<ChevronLeftIcon />
 					</IconButton>
 				</DrawerHeader>
-				<Divider />
+				{open ? <Divider /> : null}
 				<List>
 					{menus.map((menu) => (
 						<ListItem key={`navOperations${menu.title}`} disablePadding sx={{ display: 'block' }}>

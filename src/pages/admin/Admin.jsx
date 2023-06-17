@@ -1,4 +1,4 @@
-import NavBarOperations from '../components/navbar/NavBarOperations';
+import NavBarOperations from '../../components/navbar/NavBarOperations';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -12,8 +12,8 @@ import {
 	GRAPHICS_ADMIN_PATH,
 	SIGN_OUT_PATH,
 	USERS_ADMIN_PATH,
-} from '../utils/PATH';
-import AdminRouter from '../routes/AdminRouter';
+} from '../../utils/PATH';
+import AdminRouter from '../../routes/AdminRouter';
 
 const menus = [
 	{ title: 'Inicio', icon: <HomeIcon />, url: ADMIN_HOME_PATH, divider: true },
