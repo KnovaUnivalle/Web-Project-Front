@@ -1,6 +1,6 @@
 import { date, number, object, string } from 'yup';
 
-const userSchema = object().shape({
+export const userSchema = object().shape({
 	email: string()
 		.required('Campo Requerido')
 		.email('Correo Electronico Invalido')
@@ -19,5 +19,3 @@ const userSchema = object().shape({
 		.max(new Date(), 'Tu fecha de nacimiento no puede ser mayor a la fecha actual'),
 	rol: number().required('Campo Requerido'),
 });
-
-export { userSchema };

@@ -41,7 +41,7 @@ const Users = ({ dataUsers = defaultUsers }) => {
 				</Button>
 			</div>
 			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>
-				<table className='table-auto  w-full'>
+				<table className='table-auto w-full'>
 					<thead className='border-b'>
 						<tr className='bg-gray-100'>
 							<th className='text-left p-3'>Nombre</th>

@@ -1,10 +1,13 @@
 import { Form, Formik } from 'formik';
 import FormikInput from '../inputs/FormikInput';
 import { Button } from '@mui/material';
+import { searchSchema } from '../../schemas/searchSchema';
 
-const Search = () => {
+const defaultSubmit = (values) => console.log(values);
+
+const Search = ({ funcSubmit = defaultSubmit }) => {
 	return (
-		<Formik initialValues={{ search: '' }}>
+		<Formik initialValues={{ search: '' }} validationSchema={searchSchema} onSubmit={funcSubmit}>
 			<Form className='flex justify-around'>
 				<FormikInput
 					name='search'

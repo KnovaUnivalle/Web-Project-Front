@@ -14,6 +14,8 @@ export default {
 			},
 			height: {
 				128: '32rem',
+				140: '38rem',
+				152: '44rem',
 			},
 			fontFamily: {
 				roboto: ['Roboto', 'sans-serif'],

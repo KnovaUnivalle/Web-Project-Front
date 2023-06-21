@@ -1,6 +1,6 @@
 import { object, string } from 'yup';
 
-const signInSchema = object().shape({
+export const signInSchema = object().shape({
 	email: string()
 		.required('Campo Requerido')
 		.email('Correo Electronico Invalido')
@@ -13,5 +13,3 @@ const signInSchema = object().shape({
 			'La contraseña debe contener una mayúscula, una minúscula y un número',
 		),
 });
-
-export { signInSchema };
