@@ -6,8 +6,14 @@ import { searchSchema } from '../../schemas/searchSchema';
 const defaultSubmit = (values) => console.log(values);
 
 const Search = ({ funcSubmit = defaultSubmit }) => {
+
+	const handleSubmit = (values) => {
+		const search = values.search;
+		funcSubmit(search);
+	};
+
 	return (
-		<Formik initialValues={{ search: '' }} validationSchema={searchSchema} onSubmit={funcSubmit}>
+		<Formik initialValues={{ search: '' }} validationSchema={searchSchema} onSubmit={handleSubmit}>
 			<Form className='flex justify-around'>
 				<FormikInput
 					name='search'
