@@ -6,30 +6,40 @@ import News from '../../../components/tables/News';
 import { useNavigate } from 'react-router-dom';
 import { NEWS_ADD_MANAGER_PATH, NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import API from '../../../utils/API';
+import Loader from '../../../components/tools/Loader';
 
 
 const NewsManager = () => {
 	const [dataNews, setDataNews] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [reLoad, setReLoad] = useState(false);
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const doSearch = (search) => {
-		setSearchParams({ q: search });
+		setSearchParams({ title: search });
 	};
 
 	const navigateNews = (id) => {
 		navigate(`${NEWS_MANAGER_PATH}/${id}`);
 	};
 
+	const doReLoad = () => {
+		setReLoad(!reLoad);
+		doSearch('');
+	};
+
 	useEffect(() => {
-		const searchValue = searchParams.get('q') ?? '';
-		const route = searchValue ? `news/?q=${searchValue}` : 'news/';
-		API.get('news/').then((response) => {
+		setLoading(true);
+		const searchValue = searchParams.get('title') ?? '';
+		const route = searchValue ? `news/?title=${searchValue}` : 'news/';
+		API.get(route).then((response) => {
 			if (response.status === 200) {
 				setDataNews(response.data);
+				setLoading(false);
 			}
 		});
-	}, [searchParams]);
+	}, [searchParams, reLoad]);
 
 	return (
 		<>
@@ -44,7 +54,16 @@ const NewsManager = () => {
 					Nueva noticia
 				</Button>
 			</header>
-			<Search funcSubmit={doSearch} />
+			<Search submitFunc={doSearch} />
+			<div className='flex justify-center py-2'>
+				{loading ? (
+					<Loader color='#6EB500' size='2rem' />
+				) : (
+					<Button color='secondary' disableElevation onClick={doReLoad}>
+						Recargar
+					</Button>
+				)}
+			</div>
 			<News dataNews={dataNews} navigateNew={navigateNews} />
 		</>
 	);
