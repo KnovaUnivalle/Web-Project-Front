@@ -11,6 +11,7 @@ import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 import { HOME_PATHS, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 import { useAuth } from '../hooks/useAuth';
 import { GoogleLogin } from '@react-oauth/google';
+import FormContainter from '../components/containers/FormContainter';
 
 const errorMessage = {
 	title: 'Fallo en el inicio de sesión',
@@ -90,7 +91,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className='flex flex-col justify-center align-middle m-auto w-3/4 min-h-screen md:w-2/3 lg:w-1/3 xl:w-1/3'>
+		<FormContainter>
 			<Formik
 				initialValues={{
 					email: '',
@@ -146,7 +147,7 @@ const SignIn = () => {
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
-		</div>
+		</FormContainter>
 	);
 };
 

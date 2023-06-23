@@ -22,7 +22,7 @@ const NewsManager = () => {
 	};
 
 	useEffect(() => {
-		const searchValue = searchParams.get('q') || '';
+		const searchValue = searchParams.get('q') ?? '';
 		const route = searchValue ? `news/?q=${searchValue}` : 'news/';
 		API.get('news/').then((response) => {
 			if (response.status === 200) {

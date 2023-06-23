@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
+
 
 const theme = createTheme({
 	palette: {

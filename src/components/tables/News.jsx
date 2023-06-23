@@ -1,6 +1,8 @@
 import { Button } from '@mui/material';
 
-const News = ({ dataNews = [], navigateNew = () => console.log('here') }) => {
+const defaultFunc = (values) => console.log(values);
+
+const News = ({ dataNews = [], navigateNew = defaultFunc }) => {
 	return (
 		<section className='w-full py-3 flex flex-col h-152 lg:h-140'>
 			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>

@@ -3,13 +3,12 @@ import FormikInput from '../inputs/FormikInput';
 import { Button } from '@mui/material';
 import { searchSchema } from '../../schemas/searchSchema';
 
-const defaultSubmit = (values) => console.log(values);
+const defaultSubmitFunc = (values) => console.log(values);
 
-const Search = ({ funcSubmit = defaultSubmit }) => {
-
+const Search = ({ submitFunc = defaultSubmitFunc }) => {
 	const handleSubmit = (values) => {
 		const search = values.search;
-		funcSubmit(search);
+		submitFunc(search);
 	};
 
 	return (
