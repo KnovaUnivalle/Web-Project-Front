@@ -15,6 +15,7 @@ const News = ({
 	dataNew = defaultDataNew,
 	submitFunc = defaultSubmitFunc,
 	title = 'Formulario Noticias',
+	textButton = 'Submit',
 }) => {
 	const formik = useFormik({
 		initialValues: dataNew,
@@ -78,7 +79,7 @@ const News = ({
 			</FormControl>
 			<div className='flex justify-center pt-4'>
 				<Button type='submit' variant='contained' disableElevation>
-					Crear Usuario
+					{textButton}
 				</Button>
 			</div>
 		</form>

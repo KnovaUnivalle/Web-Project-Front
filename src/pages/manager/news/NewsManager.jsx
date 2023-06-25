@@ -65,7 +65,7 @@ const NewsManager = () => {
 			<Search submitFunc={doSearch} />
 			<div className='flex justify-center py-2'>
 				{loading ? (
-					<Loader color='#6EB500' size='2rem' />
+					<Loader size='2rem' />
 				) : (
 					<Button color='secondary' disableElevation onClick={doReLoad}>
 						Recargar

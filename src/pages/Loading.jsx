@@ -4,7 +4,7 @@ const Loading = () => {
 	return (
 		<div className='w-full h-screen min-h-screen flex align-middle justify-center'>
 			<div className='my-auto'>
-				<Loader />
+				<Loader color='000000' />
 			</div>
 		</div>
 	);
