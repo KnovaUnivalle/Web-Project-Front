@@ -11,7 +11,9 @@ import {
 	NEWS_ADD_MANAGER_AS_PATH,
 	NEWS_EDIT_MANAGER_AS_PATH,
 	NEWS_MANAGER_AS_PATH,
+	USERS_MANAGER_AS_PATH,
 } from '../utils/PATH';
+import UserManager from '../pages/manager/users/UserManager';
 
 const ManagerRouter = () => {
 	return (
@@ -23,6 +25,8 @@ const ManagerRouter = () => {
 				<Route path={`${NEWS_MANAGER_AS_PATH}/:id`} element={<NewsDetails />} />
 				<Route path={NEWS_ADD_MANAGER_AS_PATH} element={<NewsAdd />} />
 				<Route path={`${NEWS_EDIT_MANAGER_AS_PATH}/:id`} element={<NewsEdit />} />
+				<Route path={USERS_MANAGER_AS_PATH} element={<UserManager />} />
+				<Route path={`${USERS_MANAGER_AS_PATH}/:id`} element={<UserManager />} />
 			</Routes>
 		</Suspense>
 	);

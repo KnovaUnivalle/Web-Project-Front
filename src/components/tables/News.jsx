@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 
 const defaultFunc = (values) => console.log(values);
 
-const News = ({ dataNews = [], navigateNew = defaultFunc, navigateEdit = defaultFunc }) => {
+const News = ({ dataNews = [], navigateNews = defaultFunc, navigateEdit = defaultFunc }) => {
 	return (
 		<section className='w-full pb-3 flex flex-col h-140 lg:h-128'>
 			<div className='overflowx-x-auto overflow-y-auto border-x border-t shadow-md w-full'>
@@ -34,7 +34,7 @@ const News = ({ dataNews = [], navigateNew = defaultFunc, navigateEdit = default
 									</Button>
 								</td>
 								<td className='p-3'>
-									<Button color='primary' onClick={() => navigateNew(dataNew.id)}>
+									<Button color='primary' onClick={() => navigateNews(dataNew.id)}>
 										Noticia
 									</Button>
 								</td>
