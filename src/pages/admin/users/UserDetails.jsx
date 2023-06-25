@@ -2,22 +2,24 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import API from '../../../utils/API';
-import NewsCard from '../../../components/card/NewsCard';
 import Loader from '../../../components/tools/Loader';
+import UserCard from '../../../components/card/UserCard';
 
-const NewsDetails = () => {
-	const [dataNew, setDataNew] = useState([]);
+const UserDetails = () => {
+	const [dataUser, setDataUser] = useState({});
 	const [loading, setLoading] = useState(true);
 	const { id } = useParams();
 	const navigate = useNavigate();
+
 	useEffect(() => {
-		API.get(`news/${id}/`).then((response) => {
+		API.get(`users/${id}/`).then((response) => {
 			if (response.status === 200) {
-				setDataNew(response.data);
+				setDataUser(response.data);
 				setLoading(false);
 			}
 		});
 	}, []);
+
 	return (
 		<div className='flex flex-col justify-center align-middle h-5/6 m-auto'>
 			{loading ? (
@@ -26,7 +28,7 @@ const NewsDetails = () => {
 				</div>
 			) : (
 				<div className='m-auto'>
-					<NewsCard dataNew={dataNew} />
+					<UserCard dataUser={dataUser} />
 					<Button onClick={() => navigate(-1)} sx={{ mt: '0.75rem' }}>
 						Regresar
 					</Button>
@@ -36,4 +38,4 @@ const NewsDetails = () => {
 	);
 };
 
-export default NewsDetails;
+export default UserDetails;

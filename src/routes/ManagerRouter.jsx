@@ -6,6 +6,8 @@ const NewsManager = lazy(() => import('../pages/manager/news/NewsManager'));
 const NewsAdd = lazy(() => import('../pages/manager/news/NewsAdd'));
 const NewsEdit = lazy(() => import('../pages/manager/news/NewsEdit'));
 const NewsDetails = lazy(() => import('../pages/manager/news/NewsDetails'));
+const UserManager = lazy(() => import('../pages/manager/users/UserManager'));
+const UserDetails = lazy(() => import('../pages/manager/users/UserDetails'));
 import Loading from '../pages/Loading';
 import {
 	NEWS_ADD_MANAGER_AS_PATH,
@@ -13,7 +15,6 @@ import {
 	NEWS_MANAGER_AS_PATH,
 	USERS_MANAGER_AS_PATH,
 } from '../utils/PATH';
-import UserManager from '../pages/manager/users/UserManager';
 
 const ManagerRouter = () => {
 	return (
@@ -26,7 +27,7 @@ const ManagerRouter = () => {
 				<Route path={NEWS_ADD_MANAGER_AS_PATH} element={<NewsAdd />} />
 				<Route path={`${NEWS_EDIT_MANAGER_AS_PATH}/:id`} element={<NewsEdit />} />
 				<Route path={USERS_MANAGER_AS_PATH} element={<UserManager />} />
-				<Route path={`${USERS_MANAGER_AS_PATH}/:id`} element={<UserManager />} />
+				<Route path={`${USERS_MANAGER_AS_PATH}/:id`} element={<UserDetails />} />
 			</Routes>
 		</Suspense>
 	);

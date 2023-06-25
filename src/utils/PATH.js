@@ -17,8 +17,8 @@ export const LAND_SERVICE_PATH = '/service';
 // Sign Router
 export const SIGN_IN_PATH = '/sign/in';
 export const SIGN_IN_AS_PATH = '/in';
-export const SIGN_UP_CUSTOMER_PATH = '/sign/up/customer';
-export const SIGN_UP_CUSTOMER_AS_PATH = '/up/customer';
+export const SIGN_UP_CUSTOMER_PATH = '/sign/up/';
+export const SIGN_UP_CUSTOMER_AS_PATH = '/up/';
 export const SIGN_OUT_PATH = '/sign/out';
 export const SIGN_OUT_AS_PATH = '/out';
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@mui/material';
-import InfoDialog from '../../components/dialogs/InfoDialog';
-import Search from '../../components/forms/Search';
-import Loader from '../../components/tools/Loader';
-import { ADD_USER_ADMIN_PATH, EDIT_USER_ADMIN_PATH, USERS_ADMIN_PATH } from '../../utils/PATH';
-import Users from '../../components/tables/Users';
-import API from '../../utils/API';
+import InfoDialog from '../../../components/dialogs/InfoDialog';
+import Search from '../../../components/forms/Search';
+import Loader from '../../../components/tools/Loader';
+import { ADD_USER_ADMIN_PATH, EDIT_USER_ADMIN_PATH, USERS_ADMIN_PATH } from '../../../utils/PATH';
+import Users from '../../../components/tables/Users';
+import API from '../../../utils/API';
 
 const errorMessage = {
 	title: 'Fallo en la carga de usuarios',
