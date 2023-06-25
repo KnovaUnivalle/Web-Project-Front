@@ -46,7 +46,7 @@ const NewsEdit = () => {
 						textButton='Guardar'
 						title='Editar Noticia'
 					/>
-					<div className='py-3 mb-20'>
+					<div className='py-3'>
 						<Button onClick={() => navigate(-1)}>Regresar</Button>
 					</div>
 				</>

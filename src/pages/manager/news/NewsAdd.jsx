@@ -17,7 +17,7 @@ const NewsAdd = () => {
 	return (
 		<FormContainter>
 			<News submitFunc={handleSubmit} title='Nueva Noticia' textButton='Crear' />
-			<div className='py-3 mb-20'>
+			<div className='py-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
 		</FormContainter>
