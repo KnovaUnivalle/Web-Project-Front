@@ -9,10 +9,10 @@ import {
 	MANAGER_HOME_AS_PATH,
 } from '../utils/PATH';
 import Loading from '../pages/Loading';
-const Customer = lazy(() => import('../pages/Customer'));
+const Customer = lazy(() => import('../pages/customer/Customer'));
+const Manager = lazy(() => import('../pages/manager/Manager'));
+const Admin = lazy(() => import('../pages/admin/Admin'));
 const LandingPage = lazy(() => import('../pages/LandingPage'));
-const Manager = lazy(() => import('../pages/Manager'));
-const Admin = lazy(() => import('../pages/Admin'));
 const SignRouter = lazy(() => import('./SignRouter'));
 
 const AppRoutes = () => {

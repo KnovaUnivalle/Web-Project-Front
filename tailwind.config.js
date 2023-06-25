@@ -5,7 +5,7 @@ export default {
 		extend: {
 			colors: {
 				softlime: '#6EB500',
-				softblue: '#104BA9',
+				softblue: '#127ebb',
 				softorange: '#FFA200',
 				softgrey: '#f7f7f7',
 			},
@@ -14,6 +14,8 @@ export default {
 			},
 			height: {
 				128: '32rem',
+				140: '38rem',
+				152: '44rem',
 			},
 			fontFamily: {
 				roboto: ['Roboto', 'sans-serif'],

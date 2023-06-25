@@ -23,21 +23,26 @@ export const SIGN_OUT_PATH = '/sign/out';
 export const SIGN_OUT_AS_PATH = '/out';
 
 // Admin Router
-export const USERS_ADMIN_PATH = '/admin/users';
+const createAdminPath = (path) => ADMIN_HOME_PATH + path;
 export const USERS_ADMIN_AS_PATH = '/users';
-export const ADD_USER_ADMIN_PATH = '/admin/new';
+export const USERS_ADMIN_PATH = createAdminPath(USERS_ADMIN_AS_PATH);
 export const ADD_USER_ADMIN_AS_PATH = '/new';
+export const ADD_USER_ADMIN_PATH = createAdminPath(ADD_USER_ADMIN_AS_PATH);
 export const EDIT_USER_ADMIN__AS_PATH = '/edit';
-export const EDIT_USER_ADMIN_PATH = '/admin/edit';
-export const GRAPHICS_ADMIN_PATH = '/admin/report';
+export const EDIT_USER_ADMIN_PATH = createAdminPath(EDIT_USER_ADMIN__AS_PATH);
 export const GRAPHICS_ADMIN_AS_PATH = '/report';
+export const GRAPHICS_ADMIN_PATH = createAdminPath(GRAPHICS_ADMIN_AS_PATH);
 
 // Manager Router
-
-export const USERS_MANAGER_PATH = '/manager/users';
+const createManagerPath = (path) => MANAGER_HOME_PATH + path;
 export const USERS_MANAGER_AS_PATH = '/users';
-export const NEWS_MANAGER_PATH = '/manager/news';
+export const USERS_MANAGER_PATH = createManagerPath(USERS_MANAGER_AS_PATH);
 export const NEWS_MANAGER_AS_PATH = '/news';
-export const GRAPHICS_MANAGER_PATH = '/manager/report';
+export const NEWS_MANAGER_PATH = createManagerPath(NEWS_MANAGER_AS_PATH);
+export const NEWS_ADD_MANAGER_AS_PATH = '/news/add';
+export const NEWS_ADD_MANAGER_PATH = createManagerPath(NEWS_ADD_MANAGER_AS_PATH);
+export const NEWS_EDIT_MANAGER_AS_PATH = '/news/edit';
+export const NEWS_EDIT_MANAGER_PATH = createManagerPath(NEWS_EDIT_MANAGER_AS_PATH);
 export const GRAPHICS_MANAGER_AS_PATH = '/report';
+export const GRAPHICS_MANAGER_PATH = createManagerPath(GRAPHICS_MANAGER_AS_PATH);
 

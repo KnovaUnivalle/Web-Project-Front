@@ -1,4 +1,4 @@
-import NavBarCustomer from '../components/navbar/NavBarCustomer';
+import NavBarCustomer from '../../components/navbar/NavBarCustomer';
 
 const Customer = () => {
 	return (
