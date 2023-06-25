@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import API from '../../../utils/API';
 import NewsCard from '../../../components/card/NewsCard';
+import Loader from '../../../components/tools/Loader';
 
 const NewsDetails = () => {
 	const [dataNew, setDataNew] = useState([]);
@@ -19,13 +20,19 @@ const NewsDetails = () => {
 	}, []);
 	return (
 		<div className='flex flex-col justify-center align-middle h-5/6 m-auto'>
-			<div className='m-auto'>
-				<NewsCard dataNew={dataNew} />
+			{loading ? (
+				<div className='m-auto'>
+					<Loader />
+				</div>
+			) : (
+				<div className='m-auto'>
+					<NewsCard dataNew={dataNew} />
 
-				<Button onClick={() => navigate(-1)} sx={{ mt: '0.75rem' }}>
-					Regresar
-				</Button>
-			</div>
+					<Button onClick={() => navigate(-1)} sx={{ mt: '0.75rem' }}>
+						Regresar
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 };

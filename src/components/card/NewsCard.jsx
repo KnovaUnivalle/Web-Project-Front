@@ -9,7 +9,8 @@ const NewsCard = ({ dataNew }) => {
 					loading='lazy'
 				/>
 			</div>
-			<h2 className='text-xl font-bold font-serif lg:text-2xl '>{dataNew.title}</h2>
+			<h2 className='text-xl font-bold font-serif lg:text-3xl '>{dataNew.title}</h2>
+			<p className=' text-sm'>{`Publicado: ${dataNew.date}`}</p>
 			<p className='h-20'>{dataNew.content}</p>
 		</div>
 	);

@@ -7,33 +7,56 @@ import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
 import { compareDataToUpdate } from '../../../utils/AUX';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
+import InfoDialog from '../../../components/dialogs/InfoDialog';
+
+const errorMessage = {
+	title: 'Fallo en la edición de noticias',
+	body: 'Intenta Nuevamente',
+};
 
 const NewsEdit = () => {
 	const [dataNew, setDataNew] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [openDialogs, setOpenDialogs] = useState({ err: false });
 	const { id } = useParams();
 	const navigate = useNavigate();
 
+	const openErr = () => {
+		setOpenDialogs({ ...openDialogs, err: true });
+	};
+
+	const closeErr = () => {
+		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
 	const handleSubmit = (data) => {
 		const dataFilter = compareDataToUpdate(data, dataNew);
-		API.post(`news/update/${id}/`, dataFilter).then((response) => {
-			if (response.status === 200) {
-				navigate(NEWS_MANAGER_PATH);
-			}
-		});
+		API.post(`news/update/${id}/`, dataFilter)
+			.then((response) => {
+				if (response.status === 200) {
+					navigate(NEWS_MANAGER_PATH);
+				}
+			})
+			.catch((err) => {
+				openErr();
+			});
 	};
 
 	useEffect(() => {
-		API.get(`news/${id}/`).then((response) => {
-			if (response.status === 200) {
-				setDataNew(response.data);
-				setLoading(false);
-			}
-		});
+		API.get(`news/${id}/`)
+			.then((response) => {
+				if (response.status === 200) {
+					setDataNew(response.data);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				openErr();
+			});
 	}, []);
 
 	return (
-		<FormContainter>
+		<FormContainter height='h-5/6'>
 			{loading ? (
 				<div className='m-auto'>
 					<Loader />
@@ -51,6 +74,7 @@ const NewsEdit = () => {
 					</div>
 				</>
 			)}
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 		</FormContainter>
 	);
 };

@@ -11,14 +11,43 @@ import {
 } from '../../../utils/PATH';
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
+import InfoDialog from '../../../components/dialogs/InfoDialog';
+
+const errorMessage = {
+	title: 'Fallo en la carga de noticias',
+	body: 'Intenta Nuevamente',
+};
+
+const notFoundMessage = {
+	title: 'No se han encontrado noticias',
+	body: 'Recarga o haz una búsqueda',
+};
 
 
 const NewsManager = () => {
 	const [dataNews, setDataNews] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [reLoad, setReLoad] = useState(false);
+	const [openDialogs, setOpenDialogs] = useState({ err: false, notFound: false });
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
+
+	const openErr = () => {
+		setOpenDialogs({ ...openDialogs, err: true });
+	};
+
+	const closeErr = () => {
+		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const openNotFound = () => {
+		setOpenDialogs({ ...openDialogs, notFound: true });
+	};
+
+	const closeNotFound = () => {
+		setOpenDialogs({ ...openDialogs, notFound: false });
+	};
+
 
 	const doSearch = (search) => {
 		setSearchParams({ title: search });
@@ -41,12 +70,20 @@ const NewsManager = () => {
 		setLoading(true);
 		const searchValue = searchParams.get('title') ?? '';
 		const route = searchValue ? `news/?title=${searchValue}` : 'news/';
-		API.get(route).then((response) => {
-			if (response.status === 200) {
-				setDataNews(response.data);
-				setLoading(false);
-			}
-		});
+		API.get(route)
+			.then((response) => {
+				if (response.status === 200) {
+					setDataNews(response.data);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				if (err.response.status === 404) {
+					openNotFound();
+				} else {
+					openErr();
+				}
+			});
 	}, [searchParams, reLoad]);
 
 	return (
@@ -73,6 +110,8 @@ const NewsManager = () => {
 				)}
 			</div>
 			<News dataNews={dataNews} navigateNew={navigateNews} navigateEdit={navigateEditNews} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
 		</>
 	);
 };
