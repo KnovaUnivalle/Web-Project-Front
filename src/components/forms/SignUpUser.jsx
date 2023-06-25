@@ -62,20 +62,8 @@ const SignUpUser = ({ rol }) => {
 		setActiveButton(true);
 	};
 
-	const handleSubmit = (values) => {
-		API.post('user/register/', values)
-			.then((response) => {
-				if (response.status === 201) {
-					openSuccess();
-				}
-			})
-			.catch((err) => {
-				if (err.response && err.response.status === 400) {
-					openErr();
-				} else {
-					openErrGen();
-				}
-			});
+	const handleSubmit = (data) => {
+		console.log(data);
 	};
 
 	return (

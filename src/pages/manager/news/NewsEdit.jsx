@@ -4,8 +4,7 @@ import News from '../../../components/forms/News';
 import { useNavigate } from 'react-router-dom';
 import API from '../../../utils/API';
 
-
-const NewsAdd = () => {
+const NewsEdit = () => {
 	const navigate = useNavigate();
 	const handleSubmit = (data) => {
 		API.post('news/create/', data).then((response) => {
@@ -24,4 +23,4 @@ const NewsAdd = () => {
 	);
 };
 
-export default NewsAdd;
+export default NewsEdit;

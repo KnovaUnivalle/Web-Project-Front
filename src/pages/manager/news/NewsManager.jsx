@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 import Search from '../../../components/forms/Search';
 import News from '../../../components/tables/News';
 import { useNavigate } from 'react-router-dom';
-import { NEWS_ADD_MANAGER_PATH, NEWS_MANAGER_PATH } from '../../../utils/PATH';
+import {
+	NEWS_ADD_MANAGER_PATH,
+	NEWS_EDIT_MANAGER_PATH,
+	NEWS_MANAGER_PATH,
+} from '../../../utils/PATH';
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
 
@@ -22,6 +26,10 @@ const NewsManager = () => {
 
 	const navigateNews = (id) => {
 		navigate(`${NEWS_MANAGER_PATH}/${id}`);
+	};
+
+	const navigateEditNews = (id) => {
+		navigate(`${NEWS_EDIT_MANAGER_PATH}/${id}`);
 	};
 
 	const doReLoad = () => {
@@ -64,7 +72,7 @@ const NewsManager = () => {
 					</Button>
 				)}
 			</div>
-			<News dataNews={dataNews} navigateNew={navigateNews} />
+			<News dataNews={dataNews} navigateNew={navigateNews} navigateEdit={navigateEditNews} />
 		</>
 	);
 };

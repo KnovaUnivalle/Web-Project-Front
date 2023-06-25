@@ -2,12 +2,11 @@ import { useFormik } from 'formik';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import { newSchema } from '../../schemas/newSchema';
 
-const today = new Date(Date.now());
 const defaultSubmitFunc = (values) => console.log(values);
 const defaultDataNew = {
 	title: '',
 	content: '',
-	date: today.toISOString(),
+	date: new Date(Date.now()).toISOString().slice(0, 10),
 	image: '',
 	is_active: true,
 };
@@ -18,17 +17,15 @@ const News = ({
 	title = 'Formulario Noticias',
 }) => {
 	const formik = useFormik({
-		initialValues: defaultDataNew,
+		initialValues: dataNew,
 		validationSchema: newSchema,
-		onSubmit: (values) => {
-			alert(JSON.stringify(values, null, 2));
-		},
+		onSubmit: submitFunc,
 	});
 
 	return (
 		<form
 			onSubmit={formik.handleSubmit}
-			className='ring-4 shadow-xl rounded-xl ring-gray-400 p-8 mb-20 flex gap-1 flex-col'
+			className='ring-4 shadow-xl rounded-xl ring-gray-400 p-8 flex gap-1 flex-col'
 		>
 			<h1 className='text-center text-3xl font-semibold font-serif text-gray-500'>{title}</h1>
 			<TextField
@@ -45,7 +42,7 @@ const News = ({
 				id='content'
 				variant='standard'
 				name='content'
-				label='Título'
+				label='Contenido'
 				multiline
 				minRows={3}
 				value={formik.values.content}
@@ -57,7 +54,7 @@ const News = ({
 				id='image'
 				variant='standard'
 				name='image'
-				label='Dirección Imagen'
+				label='Dirección Recurso'
 				value={formik.values.image}
 				onChange={formik.handleChange}
 				error={formik.touched.image && Boolean(formik.errors.image)}
