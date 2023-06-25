@@ -1,14 +1,12 @@
 import NavBarOperations from '../../components/navbar/NavBarOperations';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import {
 	ADD_USER_ADMIN_PATH,
 	ADMIN_HOME_PATH,
-	EDIT_USER_ADMIN_PATH,
 	GRAPHICS_ADMIN_PATH,
 	SIGN_OUT_PATH,
 	USERS_ADMIN_PATH,
@@ -22,12 +20,6 @@ const menus = [
 		title: 'Agregar Usuario',
 		icon: <PersonAddAlt1Icon />,
 		url: ADD_USER_ADMIN_PATH,
-		divider: false,
-	},
-	{
-		title: 'Modificar Usuario',
-		icon: <ManageAccountsIcon />,
-		url: EDIT_USER_ADMIN_PATH,
 		divider: true,
 	},
 	{ title: 'Reportes', icon: <BarChartIcon />, url: GRAPHICS_ADMIN_PATH, divider: true },

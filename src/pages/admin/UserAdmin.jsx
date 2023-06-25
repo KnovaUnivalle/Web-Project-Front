@@ -1,36 +1,30 @@
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Search from '../../../components/forms/Search';
-import News from '../../../components/tables/News';
-import { useNavigate } from 'react-router-dom';
-import {
-	NEWS_ADD_MANAGER_PATH,
-	NEWS_EDIT_MANAGER_PATH,
-	NEWS_MANAGER_PATH,
-} from '../../../utils/PATH';
-import API from '../../../utils/API';
-import Loader from '../../../components/tools/Loader';
-import InfoDialog from '../../../components/dialogs/InfoDialog';
+import InfoDialog from '../../components/dialogs/InfoDialog';
+import Search from '../../components/forms/Search';
+import Loader from '../../components/tools/Loader';
+import { ADD_USER_ADMIN_PATH, EDIT_USER_ADMIN_PATH, USERS_ADMIN_PATH } from '../../utils/PATH';
+import Users from '../../components/tables/Users';
+import API from '../../utils/API';
 
 const errorMessage = {
-	title: 'Fallo en la carga de noticias',
+	title: 'Fallo en la carga de usuarios',
 	body: 'Intenta Nuevamente',
 };
 
 const notFoundMessage = {
-	title: 'No se han encontrado noticias',
+	title: 'No se han encontrado usuarios',
 	body: 'Recarga o haz una búsqueda',
 };
 
-
-const NewsManager = () => {
-	const [dataNews, setDataNews] = useState([]);
-	const [loading, setLoading] = useState(true);
+const UserAdmin = () => {
+	const [dataUsers, setDataUsers] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const [reLoad, setReLoad] = useState(false);
 	const [openDialogs, setOpenDialogs] = useState({ err: false, notFound: false });
-	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
+	const navigate = useNavigate();
 
 	const openErr = () => {
 		setOpenDialogs({ ...openDialogs, err: true });
@@ -49,15 +43,15 @@ const NewsManager = () => {
 	};
 
 	const doSearch = (search) => {
-		setSearchParams({ title: search });
+		setSearchParams({ q: search });
 	};
 
-	const navigateNews = (id) => {
-		navigate(`${NEWS_MANAGER_PATH}/${id}`);
+	const navigateUser = (id) => {
+		navigate(`${USERS_ADMIN_PATH}/${id}`);
 	};
 
-	const navigateEditNews = (id) => {
-		navigate(`${NEWS_EDIT_MANAGER_PATH}/${id}`);
+	const navigateEdit = (id) => {
+		navigate(`${EDIT_USER_ADMIN_PATH}/${id}`);
 	};
 
 	const doReLoad = () => {
@@ -67,13 +61,13 @@ const NewsManager = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		const searchValue = searchParams.get('title') ?? '';
-		const base = 'news/';
-		const route = searchValue ? `${base}?title=${searchValue}` : base;
+		const searchValue = searchParams.get('q') ?? '';
+		const base = 'users/';
+		const route = searchValue ? `${base}?q=${searchValue}` : `${base}?last=true`;
 		API.get(route)
 			.then((response) => {
 				if (response.status === 200) {
-					setDataNews(response.data);
+					setDataUsers(response.data);
 					setLoading(false);
 				}
 			})
@@ -90,14 +84,14 @@ const NewsManager = () => {
 	return (
 		<>
 			<header className='pt-3 flex justify-between'>
-				<h1 className='text-2xl my-auto'>Noticias</h1>
+				<h1 className='text-2xl'>Usuarios</h1>
 				<Button
 					color='secondary'
 					variant='contained'
 					disableElevation
-					onClick={() => navigate(NEWS_ADD_MANAGER_PATH)}
+					onClick={() => navigate(ADD_USER_ADMIN_PATH)}
 				>
-					Nueva noticia
+					Nueva usuario
 				</Button>
 			</header>
 			<Search submitFunc={doSearch} />
@@ -110,11 +104,11 @@ const NewsManager = () => {
 					</Button>
 				)}
 			</div>
-			<News dataNews={dataNews} navigateNews={navigateNews} navigateEdit={navigateEditNews} />
+			<Users dataUsers={dataUsers} navigateUser={navigateUser} navigateEdit={navigateEdit} />
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
 			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
 		</>
 	);
 };
 
-export default NewsManager;
+export default UserAdmin;

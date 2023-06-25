@@ -9,12 +9,12 @@ import { USERS_MANAGER_PATH } from '../../../utils/PATH';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
 
 const errorMessage = {
-	title: 'Fallo en la carga de noticias',
+	title: 'Fallo en la carga de usuarios',
 	body: 'Intenta Nuevamente',
 };
 
 const notFoundMessage = {
-	title: 'No se han encontrado noticias',
+	title: 'No se han encontrado usuarios',
 	body: 'Recarga o haz una búsqueda',
 };
 
@@ -73,6 +73,7 @@ const UserManager = () => {
 				} else {
 					openErr();
 				}
+				setLoading(false);
 			});
 	}, [searchParams, reLoad]);
 
