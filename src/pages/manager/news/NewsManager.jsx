@@ -1,9 +1,8 @@
 import { Button } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Search from '../../../components/forms/Search';
 import News from '../../../components/tables/News';
-import { useNavigate } from 'react-router-dom';
 import {
 	NEWS_ADD_MANAGER_PATH,
 	NEWS_EDIT_MANAGER_PATH,
@@ -22,7 +21,6 @@ const notFoundMessage = {
 	title: 'No se han encontrado noticias',
 	body: 'Recarga o haz una búsqueda',
 };
-
 
 const NewsManager = () => {
 	const [dataNews, setDataNews] = useState([]);

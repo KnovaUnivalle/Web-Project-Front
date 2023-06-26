@@ -15,7 +15,7 @@ const errorMessage = {
 };
 
 const NewsEdit = () => {
-	const [dataNew, setDataNew] = useState([]);
+	const [dataNew, setDataNew] = useState({});
 	const [loading, setLoading] = useState(true);
 	const [openDialogs, setOpenDialogs] = useState({ err: false });
 	const { id } = useParams();

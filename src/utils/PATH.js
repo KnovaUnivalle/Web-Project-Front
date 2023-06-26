@@ -45,4 +45,3 @@ export const NEWS_EDIT_MANAGER_AS_PATH = '/news/edit';
 export const NEWS_EDIT_MANAGER_PATH = createManagerPath(NEWS_EDIT_MANAGER_AS_PATH);
 export const GRAPHICS_MANAGER_AS_PATH = '/report';
 export const GRAPHICS_MANAGER_PATH = createManagerPath(GRAPHICS_MANAGER_AS_PATH);
-

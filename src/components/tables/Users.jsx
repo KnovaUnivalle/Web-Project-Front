@@ -44,5 +44,5 @@ const Users = ({ dataUsers = [], navigateUser = defaultFunc, navigateEdit }) => 
 		</section>
 	);
 };
- 
+
 export default Users;

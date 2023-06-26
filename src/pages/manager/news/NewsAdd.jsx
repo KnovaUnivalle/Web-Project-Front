@@ -23,7 +23,7 @@ const NewsAdd = () => {
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
-	
+
 	const handleSubmit = (data) => {
 		API.post('news/create/', data)
 			.then((response) => {

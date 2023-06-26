@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Route } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { LAND_SERVICE_PATH, LAND_TEAM_PATH } from '../utils/PATH';
 import Loading from '../pages/Loading';
 const NotMatch = lazy(() => import('../pages/NotMatch'));
