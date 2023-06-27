@@ -5,7 +5,7 @@ import FormContainter from '../../../components/containers/FormContainter';
 import News from '../../../components/forms/News';
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
-import { compareDataToUpdate } from '../../../utils/AUX';
+import { compareDataToUpdate } from '../../../utils/AUXILIAR';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
 

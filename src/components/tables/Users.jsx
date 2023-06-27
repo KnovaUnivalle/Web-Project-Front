@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { defineRol } from '../../utils/AUX';
+import { defineRol } from '../../utils/AUXILIAR';
 
 const defaultFunc = (values) => console.log(values);
 

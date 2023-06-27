@@ -1,4 +1,4 @@
-import { defineRol } from '../../utils/AUX';
+import { defineRol } from '../../utils/AUXILIAR';
 
 const UserCard = ({ dataUser }) => {
 	return (

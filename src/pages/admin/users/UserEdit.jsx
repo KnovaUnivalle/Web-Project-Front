@@ -7,7 +7,7 @@ import FormContainter from '../../../components/containers/FormContainter';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
 import Loader from '../../../components/tools/Loader';
 import { userSchemaUpdate } from '../../../schemas/signUpSchema';
-import { compareDataToUpdate } from '../../../utils/AUX';
+import { compareDataToUpdate } from '../../../utils/AUXILIAR';
 
 const errorMessage = {
 	title: 'Fallo en el editar',
