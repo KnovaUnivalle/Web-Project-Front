@@ -15,14 +15,14 @@ const NoAuthorizeddMsg = {
 
 const AuthDialog = ({ noAuthenticated = false, NoAuthorized = false }) => {
 	const navigate = useNavigate();
-	const { rol } = useAuth();
+	const { rol, logout } = useAuth();
 
 	const onCloseNoAuthorized = () => {
 		navigate(HOME_PATHS[rol]);
 	};
 
 	const onCloseNoAuthenticated = () => {
-		navigate(SIGN_IN_PATH);
+		logout(navigate(SIGN_IN_PATH));
 	};
 
 	return (

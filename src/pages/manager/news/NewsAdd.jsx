@@ -18,7 +18,6 @@ const NewsAdd = () => {
 	});
 	const navigate = useNavigate();
 
-
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
