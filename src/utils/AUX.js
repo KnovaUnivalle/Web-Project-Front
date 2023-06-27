@@ -6,3 +6,7 @@ export const compareDataToUpdate = (newData, prevData) => {
 		return result;
 	}, {});
 };
+
+export const defineRol = (rol) => {
+	return ['Administrador', 'Cliente', 'Gerente'][rol];
+};

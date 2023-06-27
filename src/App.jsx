@@ -1,8 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes/AppRouter';
-import { ThemeProvider } from '@emotion/react';
-import theme from './components/utils/theme';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ThemeProvider } from '@emotion/react';
+import AppRoutes from './routes/AppRouter';
+import theme from './components/utils/theme';
 import { GOOGLE_CLIENT_ID } from './utils/ENV';
 import { AuthProvider } from './hooks/useAuth';
 

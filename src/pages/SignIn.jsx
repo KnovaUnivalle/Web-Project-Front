@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Form, Formik } from 'formik';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@mui/material';
+import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { signInSchema } from '../schemas/signInSchema';
 import InfoDialog from '../components/dialogs/InfoDialog';
@@ -10,7 +11,6 @@ import API from '../utils/API';
 import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 import { HOME_PATHS, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 import { useAuth } from '../hooks/useAuth';
-import { GoogleLogin } from '@react-oauth/google';
 import FormContainter from '../components/containers/FormContainter';
 
 const errorMessage = {

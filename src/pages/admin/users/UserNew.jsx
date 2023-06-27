@@ -1,16 +1,11 @@
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import SignUpUser from '../../components/forms/SignUpUser';
-import { SIGN_IN_PATH } from '../../utils/PATH';
-import FormContainter from '../../components/containers/FormContainter';
-import InfoDialog from '../../components/dialogs/InfoDialog';
-import API from '../../utils/API';
+import SignUpUser from '../../../components/forms/SignUpUser';
+import API from '../../../utils/API';
+import FormContainter from '../../../components/containers/FormContainter';
+import InfoDialog from '../../../components/dialogs/InfoDialog';
 
-const successMessage = {
-	title: 'Registro exitoso',
-	body: 'Ya puedes iniciar sesión.',
-};
 const errorMessage = {
 	title: 'Fallo en el registro',
 	body: 'El Correo ya se encuentra registrado.',
@@ -21,8 +16,8 @@ const errorGeneralMessage = {
 	body: 'Revisa tu conexión e intenta nuevamente',
 };
 
-const SignCustomer = () => {
-	const [openDialogs, setOpenDialogs] = useState({ err: false, success: false, errGen: false });
+const UserNew = () => {
+	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
 	const navigate = useNavigate();
 
 	const openErr = () => {
@@ -31,15 +26,6 @@ const SignCustomer = () => {
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
-	};
-
-	const openSuccess = () => {
-		setOpenDialogs({ ...openDialogs, success: true });
-	};
-
-	const closeSuccess = () => {
-		setOpenDialogs({ ...openDialogs, success: false });
-		navigate(SIGN_IN_PATH);
 	};
 
 	const openErrGen = () => {
@@ -51,10 +37,10 @@ const SignCustomer = () => {
 	};
 
 	const handleSubmit = (values) => {
-		API.post('customer/register/', values)
+		API.post('user/register/', values)
 			.then((response) => {
 				if (response.status === 201) {
-					openSuccess();
+					navigate(-1);
 				}
 			})
 			.catch((err) => {
@@ -65,19 +51,16 @@ const SignCustomer = () => {
 				}
 			});
 	};
-
 	return (
 		<FormContainter>
-			<SignUpUser handleSubmit={handleSubmit} />
-			<div className='flex justify-between pt-3'>
+			<SignUpUser handleSubmit={handleSubmit} admin={true} />
+			<div className='pt-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
-				<Button onClick={() => navigate(SIGN_IN_PATH)}>Iniciar Sesión</Button>
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeSuccess} open={openDialogs.success} message={successMessage} />
 			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
 		</FormContainter>
 	);
 };
 
-export default SignCustomer;
+export default UserNew;
