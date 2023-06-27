@@ -8,11 +8,7 @@ import Loader from '../../../components/tools/Loader';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la edición de noticias',
-	body: 'Intenta Nuevamente',
-};
+import { errorGeneralEdit } from '../../../utils/MSG';
 
 const NewsEdit = () => {
 	const [dataNew, setDataNew] = useState({});
@@ -74,7 +70,7 @@ const NewsEdit = () => {
 					</div>
 				</>
 			)}
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorGeneralEdit} />
 		</FormContainter>
 	);
 };

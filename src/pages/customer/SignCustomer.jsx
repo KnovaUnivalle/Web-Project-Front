@@ -6,19 +6,11 @@ import { SIGN_IN_PATH } from '../../utils/PATH';
 import FormContainter from '../../components/containers/FormContainter';
 import InfoDialog from '../../components/dialogs/InfoDialog';
 import API from '../../utils/API';
+import { errorRegisterUser, errorUser } from '../../utils/MSG';
 
 const successMessage = {
 	title: 'Registro exitoso',
 	body: 'Ya puedes iniciar sesión.',
-};
-const errorMessage = {
-	title: 'Fallo en el registro',
-	body: 'El Correo ya se encuentra registrado.',
-};
-
-const errorGeneralMessage = {
-	title: 'Error en el registro',
-	body: 'Revisa tu conexión e intenta nuevamente',
 };
 
 const SignCustomer = () => {
@@ -73,9 +65,9 @@ const SignCustomer = () => {
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 				<Button onClick={() => navigate(SIGN_IN_PATH)}>Iniciar Sesión</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorRegisterUser} />
 			<InfoDialog close={closeSuccess} open={openDialogs.success} message={successMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorUser} />
 		</FormContainter>
 	);
 };

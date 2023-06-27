@@ -6,11 +6,7 @@ import API from '../../../utils/API';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import { useState } from 'react';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la creación de noticias',
-	body: 'Intenta Nuevamente',
-};
+import { errorNews } from '../../../utils/MSG';
 
 const NewsAdd = () => {
 	const navigate = useNavigate();
@@ -41,7 +37,7 @@ const NewsAdd = () => {
 			<div className='py-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNews} />
 		</FormContainter>
 	);
 };

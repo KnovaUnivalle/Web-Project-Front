@@ -11,16 +11,7 @@ import {
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la carga de noticias',
-	body: 'Intenta Nuevamente',
-};
-
-const notFoundMessage = {
-	title: 'No se han encontrado noticias',
-	body: 'Recarga o haz una búsqueda',
-};
+import { errorNews, errorNotFoundNews } from '../../../utils/MSG';
 
 const NewsManager = () => {
 	const [dataNews, setDataNews] = useState([]);
@@ -109,8 +100,8 @@ const NewsManager = () => {
 				)}
 			</div>
 			<News dataNews={dataNews} navigateNews={navigateNews} navigateEdit={navigateEditNews} />
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNews} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundNews} />
 		</>
 	);
 };

@@ -7,16 +7,7 @@ import Loader from '../../../components/tools/Loader';
 import { ADD_USER_ADMIN_PATH, EDIT_USER_ADMIN_PATH, USERS_ADMIN_PATH } from '../../../utils/PATH';
 import Users from '../../../components/tables/Users';
 import API from '../../../utils/API';
-
-const errorMessage = {
-	title: 'Fallo en la carga de usuarios',
-	body: 'Intenta Nuevamente',
-};
-
-const notFoundMessage = {
-	title: 'No se han encontrado usuarios',
-	body: 'Recarga o haz una búsqueda',
-};
+import { errorNotFoundUser, errorUsers } from '../../../utils/MSG';
 
 const UserAdmin = () => {
 	const [dataUsers, setDataUsers] = useState([]);
@@ -105,8 +96,8 @@ const UserAdmin = () => {
 				)}
 			</div>
 			<Users dataUsers={dataUsers} navigateUser={navigateUser} navigateEdit={navigateEdit} />
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUsers} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
 		</>
 	);
 };

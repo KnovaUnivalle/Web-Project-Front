@@ -5,6 +5,7 @@ import SignUpUser from '../../../components/forms/SignUpUser';
 import API from '../../../utils/API';
 import FormContainter from '../../../components/containers/FormContainter';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
+import { errorRegisterUser, errorUser } from '../../../utils/MSG';
 
 const errorMessage = {
 	title: 'Fallo en el registro',
@@ -57,8 +58,8 @@ const UserNew = () => {
 			<div className='pt-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorRegisterUser} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorUser} />
 		</FormContainter>
 	);
 };

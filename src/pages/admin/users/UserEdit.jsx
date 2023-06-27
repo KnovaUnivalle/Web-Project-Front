@@ -8,16 +8,7 @@ import InfoDialog from '../../../components/dialogs/InfoDialog';
 import Loader from '../../../components/tools/Loader';
 import { userSchemaUpdate } from '../../../schemas/signUpSchema';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
-
-const errorMessage = {
-	title: 'Fallo en el editar',
-	body: 'El Correo ya se encuentra registrado.',
-};
-
-const errorGeneralMessage = {
-	title: 'Error en el editar',
-	body: 'Revisa tu conexión e intenta nuevamente',
-};
+import { errorGeneralEdit, errorUserEdit } from '../../../utils/MSG';
 
 const UserNew = () => {
 	const [dataUser, setDataUser] = useState({});
@@ -90,8 +81,8 @@ const UserNew = () => {
 					</div>
 				</>
 			)}
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUserEdit} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralEdit} />
 		</FormContainter>
 	);
 };
