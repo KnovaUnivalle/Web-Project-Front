@@ -31,7 +31,7 @@ const NewsEdit = () => {
 
 	const handleSubmit = (data) => {
 		const dataFilter = compareDataToUpdate(data, dataNew);
-		API.post(`news/update/${id}/`, dataFilter)
+		API.put(`news/update/${id}/`, dataFilter)
 			.then((response) => {
 				if (response.status === 200) {
 					navigate(NEWS_MANAGER_PATH);

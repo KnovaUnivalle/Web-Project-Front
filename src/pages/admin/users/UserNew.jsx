@@ -37,7 +37,7 @@ const UserNew = () => {
 	};
 
 	const handleSubmit = (values) => {
-		API.post('/admin/createuser', values)
+		API.post('user/register/', values)
 			.then((response) => {
 				if (response.status === 201) {
 					navigate(-1);
