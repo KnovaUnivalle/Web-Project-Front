@@ -8,28 +8,26 @@ import InfoDialog from '../../../components/dialogs/InfoDialog';
 import Loader from '../../../components/tools/Loader';
 import { userSchemaUpdate } from '../../../schemas/signUpSchema';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
-import { errorGeneralEdit, errorUserEdit } from '../../../utils/MSG';
+import { errorNotFoundUser, errorUserEdit } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserNew = () => {
 	const [dataUser, setDataUser] = useState({});
 	const [loading, setLoading] = useState(true);
-	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const navigate = useNavigate();
 	const { id } = useParams();
-
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
 
-	const openErrGen = () => {
-		setOpenDialogs({ ...openDialogs, errGen: true });
-	};
-
-	const closeErrGen = () => {
+	const closeNotFound = () => {
 		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
@@ -42,22 +40,36 @@ const UserNew = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response && err.response.status === 400) {
-					openErr();
+				if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
 				} else {
-					openErrGen();
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 			});
 	};
 
 	useEffect(() => {
-		API.get(`users/${id}/`).then((response) => {
-			if (response.status === 200) {
-				response.data.password = '';
-				setDataUser(response.data);
-				setLoading(false);
-			}
-		});
+		API.get(`users/${id}/`)
+			.then((response) => {
+				if (response.status === 200) {
+					response.data.password = '';
+					setDataUser(response.data);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				} else if (err.response.status === 404) {
+					setOpenDialogs({ ...openDialogs, notFound: true });
+				} else {
+					setOpenDialogs({ ...openDialogs, err: true });
+				}
+			});
 	}, []);
 
 	return (
@@ -82,7 +94,11 @@ const UserNew = () => {
 				</>
 			)}
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUserEdit} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralEdit} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</FormContainter>
 	);
 };

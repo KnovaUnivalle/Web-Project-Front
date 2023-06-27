@@ -13,7 +13,7 @@ const NoAuthorizeddMsg = {
 	body: 'Debes ser un usuario con los permisos correctos',
 };
 
-const AuthDialog = ({ noAuthenticated = false, NoAuthorized }) => {
+const AuthDialog = ({ noAuthenticated = false, NoAuthorized = false }) => {
 	const navigate = useNavigate();
 	const { rol } = useAuth();
 

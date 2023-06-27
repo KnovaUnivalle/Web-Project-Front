@@ -8,25 +8,23 @@ import { ADD_USER_ADMIN_PATH, EDIT_USER_ADMIN_PATH, USERS_ADMIN_PATH } from '../
 import Users from '../../../components/tables/Users';
 import API from '../../../utils/API';
 import { errorNotFoundUser, errorUsers } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserAdmin = () => {
 	const [dataUsers, setDataUsers] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [reLoad, setReLoad] = useState(false);
-	const [openDialogs, setOpenDialogs] = useState({ err: false, notFound: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const [searchParams, setSearchParams] = useSearchParams();
 	const navigate = useNavigate();
 
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
-
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
-	};
-
-	const openNotFound = () => {
-		setOpenDialogs({ ...openDialogs, notFound: true });
 	};
 
 	const closeNotFound = () => {
@@ -63,10 +61,14 @@ const UserAdmin = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 404) {
-					openNotFound();
+				if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				} else if (err.response.status === 404) {
+					setOpenDialogs({ ...openDialogs, notFound: true });
 				} else {
-					openErr();
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 				setLoading(false);
 			});
@@ -98,6 +100,10 @@ const UserAdmin = () => {
 			<Users dataUsers={dataUsers} navigateUser={navigateUser} navigateEdit={navigateEdit} />
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUsers} />
 			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</>
 	);
 };
