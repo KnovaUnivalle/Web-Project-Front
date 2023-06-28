@@ -1,9 +1,9 @@
-import NavBarCustomer from '../../components/navbar/NavBarCustomer';
+import Home from '../Home';
 
 const Customer = () => {
 	return (
 		<div className='flex flex-col min-h-screen'>
-			<NavBarCustomer />
+			<Home />
 		</div>
 	);
 };
