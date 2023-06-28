@@ -7,35 +7,24 @@ import Users from '../../../components/tables/Users';
 import API from '../../../utils/API';
 import { USERS_MANAGER_PATH } from '../../../utils/PATH';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la carga de usuarios',
-	body: 'Intenta Nuevamente',
-};
-
-const notFoundMessage = {
-	title: 'No se han encontrado usuarios',
-	body: 'Recarga o haz una búsqueda',
-};
+import { errorNotFoundUser, errorUsers } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserManager = () => {
 	const [dataUsers, setDataUsers] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [reLoad, setReLoad] = useState(false);
-	const [openDialogs, setOpenDialogs] = useState({ err: false, notFound: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const [searchParams, setSearchParams] = useSearchParams();
 	const navigate = useNavigate();
 
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
-
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
-	};
-
-	const openNotFound = () => {
-		setOpenDialogs({ ...openDialogs, notFound: true });
 	};
 
 	const closeNotFound = () => {
@@ -68,10 +57,14 @@ const UserManager = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 404) {
-					openNotFound();
+				if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				} else if (err.response.status === 404) {
+					setOpenDialogs({ ...openDialogs, notFound: true });
 				} else {
-					openErr();
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 				setLoading(false);
 			});
@@ -93,8 +86,12 @@ const UserManager = () => {
 				)}
 			</div>
 			<Users dataUsers={dataUsers} navigateUser={navigateUser} />
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUsers} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</>
 	);
 };

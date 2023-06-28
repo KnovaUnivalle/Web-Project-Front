@@ -4,20 +4,49 @@ import { Button } from '@mui/material';
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
 import UserCard from '../../../components/card/UserCard';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
+import InfoDialog from '../../../components/dialogs/InfoDialog';
+import { errorNotFoundUser, errorUsers } from '../../../utils/MSG';
 
 const UserDetails = () => {
 	const [dataUser, setDataUser] = useState({});
 	const [loading, setLoading] = useState(true);
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const { id } = useParams();
 	const navigate = useNavigate();
 
+	const closeErr = () => {
+		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const closeNotFound = () => {
+		setOpenDialogs({ ...openDialogs, notFound: false });
+	};
 	useEffect(() => {
-		API.get(`users/${id}/`).then((response) => {
-			if (response.status === 200) {
-				setDataUser(response.data);
+		API.get(`users/${id}/`)
+			.then((response) => {
+				if (response.status === 200) {
+					setDataUser(response.data);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				} else if (err.response.status === 404) {
+					setOpenDialogs({ ...openDialogs, notFound: true });
+				} else {
+					setOpenDialogs({ ...openDialogs, err: true });
+				}
 				setLoading(false);
-			}
-		});
+			});
 	}, []);
 
 	return (
@@ -34,6 +63,12 @@ const UserDetails = () => {
 					</Button>
 				</div>
 			)}
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUsers} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</div>
 	);
 };

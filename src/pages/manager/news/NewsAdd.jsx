@@ -6,22 +6,24 @@ import API from '../../../utils/API';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import { useState } from 'react';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la creación de noticias',
-	body: 'Intenta Nuevamente',
-};
+import { errorNews } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const NewsAdd = () => {
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		errGen: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const navigate = useNavigate();
-	const [openDialogs, setOpenDialogs] = useState({ err: false });
-
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const closeErrGen = () => {
+		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
 	const handleSubmit = (data) => {
@@ -32,7 +34,15 @@ const NewsAdd = () => {
 				}
 			})
 			.catch((err) => {
-				openErr();
+				if (err.response.status === 400) {
+					setOpenDialogs({ ...openDialogs, err: true });
+				} else if (err.response.status === 401) {
+					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+				} else if (err.response.status === 403) {
+					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				} else {
+					setOpenDialogs({ ...openDialogs, errGen: true });
+				}
 			});
 	};
 	return (
@@ -41,7 +51,12 @@ const NewsAdd = () => {
 			<div className='py-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNews} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorNews} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</FormContainter>
 	);
 };

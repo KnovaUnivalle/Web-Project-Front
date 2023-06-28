@@ -6,7 +6,6 @@ import {
 	DialogContentText,
 	DialogTitle,
 } from '@mui/material';
-import { useState } from 'react';
 
 const InfoDialog = ({
 	message = { title: 'error', body: 'error' },
