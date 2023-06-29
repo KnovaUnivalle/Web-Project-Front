@@ -46,6 +46,7 @@ const News = ({
 				label='Contenido'
 				multiline
 				minRows={3}
+				maxRows={5}
 				value={formik.values.content}
 				onChange={formik.handleChange}
 				error={formik.touched.content && Boolean(formik.errors.content)}
