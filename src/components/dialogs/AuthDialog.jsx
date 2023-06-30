@@ -22,7 +22,7 @@ const AuthDialog = ({ noAuthenticated = false, NoAuthorized = false }) => {
 	};
 
 	const onCloseNoAuthenticated = () => {
-		logout(navigate(SIGN_IN_PATH));
+		logout(() => navigate(SIGN_IN_PATH));
 	};
 
 	return (

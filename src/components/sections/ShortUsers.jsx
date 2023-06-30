@@ -1,29 +1,7 @@
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { USERS_ADMIN_PATH } from '../../utils/PATH';
-
-const defaultUsers = [
-	{
-		correo: 'jose.cardenas@correounivalle.edu.co',
-		activo: 'Sí',
-		tipo: 'Gerente',
-	},
-	{
-		correo: 'jose.a.cardenas@correounivalle.edu.co',
-		activo: 'Sí',
-		tipo: 'Gerente',
-	},
-	{
-		correo: 'jose.e.cardenas@correounivalle.edu.co',
-		activo: 'Sí',
-		tipo: 'Gerente',
-	},
-	{
-		correo: 'jose.i.cardenas@correounivalle.edu.co',
-		activo: 'Sí',
-		tipo: 'Gerente',
-	},
-];
+import { defineRol } from '../../utils/AUXILIAR';
 
 const ShortUsers = ({ dataUsers = defaultUsers }) => {
 	const navigate = useNavigate();
@@ -47,10 +25,10 @@ const ShortUsers = ({ dataUsers = defaultUsers }) => {
 					</thead>
 					<tbody>
 						{dataUsers.map((dataUser) => (
-							<tr className='border-b hover:bg-gray-50' key={`row${dataUser.correo}`}>
-								<td className='p-3'>{dataUser.correo}</td>
-								<td className='p-3'>{dataUser.activo}</td>
-								<td className='p-3'>{dataUser.tipo}</td>
+							<tr className='border-b hover:bg-gray-50' key={`row${dataUser.id}`}>
+								<td className='p-3'>{defineRol(dataUser.rol)}</td>
+								<td className='p-3'>{dataUser.email}</td>
+								<td className='p-3'>{dataUser.is_active ? 'Activo' : 'Inactivo'}</td>
 							</tr>
 						))}
 					</tbody>

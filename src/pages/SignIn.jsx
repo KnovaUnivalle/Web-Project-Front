@@ -25,7 +25,7 @@ const SignIn = () => {
 
 	const successNavigate = (data) => {
 		const { access, rol_id } = data;
-		login(access, rol_id, navigate(HOME_PATHS[rol_id]));
+		login(access, rol_id, () => navigate(HOME_PATHS[rol_id]));
 	};
 
 	const openErr = () => {

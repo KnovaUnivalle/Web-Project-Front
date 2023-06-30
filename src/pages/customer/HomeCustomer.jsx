@@ -35,7 +35,7 @@ const HomeCustomer = () => {
 		API.get('suggestion/')
 			.then((response) => {
 				if (response.status === 200) {
-					setDataRec(response.data);
+					setDataRec(response.data.suggested_products);
 					setLoadingRec(false);
 				}
 			})
@@ -60,7 +60,7 @@ const HomeCustomer = () => {
 					<Loader />
 				</div>
 			) : (
-				<Recomendations />
+				<Recomendations dataProducts={dataRec} />
 			)}
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNotFound} />
 		</main>
