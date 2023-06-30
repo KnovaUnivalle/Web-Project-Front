@@ -26,7 +26,7 @@ const Users = ({ dataUsers = [], navigateUser = defaultFunc, navigateEdit }) => 
 								{navigateEdit ? (
 									<td className='p-3'>
 										<Button color='secondary' onClick={() => navigateEdit(dataUser.id)}>
-											Noticia
+											Usuario
 										</Button>
 									</td>
 								) : null}

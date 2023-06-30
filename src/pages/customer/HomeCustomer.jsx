@@ -47,9 +47,9 @@ const HomeCustomer = () => {
 	}, []);
 
 	return (
-		<main className='p-3 lg:px-1 md:flex'>
+		<main className='p-3 md:flex'>
 			{loadingNews ? (
-				<div className='flex justify-center m-auto'>
+				<div className='flex justify-center m-auto h-full'>
 					<Loader />
 				</div>
 			) : (

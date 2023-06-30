@@ -13,11 +13,11 @@ const dataList = [data, data, data];
 const News = ({ dataNews = dataList }) => {
 	setTimeout(() => {}, 500);
 	return (
-		<article className='md:w-1/2'>
+		<article className='md:w-1/2 h-full'>
 			<h1 className='text-center text-3xl font-semibold pb-3 w-full'>Noticias</h1>
-			<Carousel>
+			<Carousel className='h-128'>
 				{dataNews.map((dataNew, index) => (
-					<div className='flex justify-center m-auto h-116' key={`newCard${index}`}>
+					<div className='flex justify-center h-116' key={`newCard${index}`}>
 						<NewsCard dataNew={dataNew} />
 					</div>
 				))}

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { GRAPHICS_ADMIN_PATH, NEWS_MANAGER_PATH, USERS_MANAGER_PATH } from '../../utils/PATH';
+import { GRAPHICS_MANAGER_PATH, NEWS_MANAGER_PATH, USERS_MANAGER_PATH } from '../../utils/PATH';
 import ManagerHomeCard from '../card/ManagerHomeCard';
 
 const CardsManager = () => {
@@ -21,7 +21,7 @@ const CardsManager = () => {
 			<ManagerHomeCard
 				title={'Reportes'}
 				text={'Consulta el estado de Detective, y las diferentes graficas que se generan.'}
-				navigate={() => navigate(GRAPHICS_ADMIN_PATH)}
+				navigate={() => navigate(GRAPHICS_MANAGER_PATH)}
 			/>
 		</section>
 	);
