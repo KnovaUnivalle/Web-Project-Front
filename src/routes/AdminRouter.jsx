@@ -5,6 +5,7 @@ import {
 	ADD_USER_ADMIN_AS_PATH,
 	EDIT_USER_ADMIN__AS_PATH,
 	USERS_ADMIN_AS_PATH,
+	GRAPHICS_ADMIN_AS_PATH
 } from '../utils/PATH';
 const NotMatch = lazy(() => import('../pages/NotMatch'));
 const HomeAdmin = lazy(() => import('../pages/admin/HomeAdmin'));
@@ -12,6 +13,7 @@ const UserAdmin = lazy(() => import('../pages/admin/users/UserAdmin'));
 const UserDetails = lazy(() => import('../pages/admin/users/UserDetails'));
 const UserNew = lazy(() => import('../pages/admin/users/UserNew'));
 const UserEdit = lazy(() => import('../pages/admin/users/UserEdit'));
+const Reports = lazy(() => import('../pages/admin/Reports'));
 
 const AdminRouter = () => {
 	return (
@@ -23,6 +25,7 @@ const AdminRouter = () => {
 				<Route path={`${USERS_ADMIN_AS_PATH}/:id`} element={<UserDetails />} />
 				<Route path={`${EDIT_USER_ADMIN__AS_PATH}/:id`} element={<UserEdit />} />
 				<Route path={ADD_USER_ADMIN_AS_PATH} element={<UserNew />} />
+				<Route path={GRAPHICS_ADMIN_AS_PATH} element={<Reports />} />
 			</Routes>
 		</Suspense>
 	);
