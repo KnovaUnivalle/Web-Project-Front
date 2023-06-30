@@ -13,6 +13,7 @@ export default {
 				food: "url('/food_bg.png')",
 			},
 			height: {
+				116: '29rem',
 				128: '32rem',
 				140: '38rem',
 				152: '44rem',

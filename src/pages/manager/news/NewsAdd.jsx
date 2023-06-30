@@ -12,7 +12,6 @@ import AuthDialog from '../../../components/dialogs/AuthDialog';
 const NewsAdd = () => {
 	const [openDialogs, setOpenDialogs] = useState({
 		err: false,
-		errGen: false,
 		noAuthenticated: false,
 		NoAuthorized: false,
 	});
@@ -20,10 +19,6 @@ const NewsAdd = () => {
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
-	};
-
-	const closeErrGen = () => {
-		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
 	const handleSubmit = (data) => {
@@ -34,14 +29,20 @@ const NewsAdd = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 400) {
-					setOpenDialogs({ ...openDialogs, err: true });
-				} else if (err.response.status === 401) {
-					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
-				} else if (err.response.status === 403) {
-					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
-					setOpenDialogs({ ...openDialogs, errGen: true });
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 			});
 	};
@@ -52,7 +53,6 @@ const NewsAdd = () => {
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNews} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorNews} />
 			<AuthDialog
 				noAuthenticated={openDialogs.noAuthenticated}
 				NoAuthorized={openDialogs.NoAuthorized}

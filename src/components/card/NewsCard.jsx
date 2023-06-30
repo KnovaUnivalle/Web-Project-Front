@@ -1,6 +1,6 @@
 const NewsCard = ({ dataNew }) => {
 	return (
-		<div className='border-x border-t shadow-md p-2 my-auto'>
+		<div className='border-x border-t shadow-md p-2 my-auto md:w-80'>
 			<img
 				className='w-full mx-auto md:w-80 block'
 				src={dataNew.image}

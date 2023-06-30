@@ -8,7 +8,7 @@ import InfoDialog from '../../../components/dialogs/InfoDialog';
 import Loader from '../../../components/tools/Loader';
 import { userSchemaUpdate } from '../../../schemas/signUpSchema';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
-import { errorNotFoundUser, errorUserEdit } from '../../../utils/MSG';
+import { errorGeneralEdit, errorNotFoundUser } from '../../../utils/MSG';
 import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserNew = () => {
@@ -40,10 +40,18 @@ const UserNew = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
-					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
-				} else if (err.response.status === 403) {
-					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
 					setOpenDialogs({ ...openDialogs, err: true });
 				}
@@ -60,15 +68,25 @@ const UserNew = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
-					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
-				} else if (err.response.status === 403) {
-					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
-				} else if (err.response.status === 404) {
-					setOpenDialogs({ ...openDialogs, notFound: true });
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						case 404:
+							setOpenDialogs({ ...openDialogs, notFound: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
 					setOpenDialogs({ ...openDialogs, err: true });
 				}
+				setLoading(false);
 			});
 	}, []);
 
@@ -93,7 +111,7 @@ const UserNew = () => {
 					</div>
 				</>
 			)}
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorUserEdit} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorGeneralEdit} />
 			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
 			<AuthDialog
 				noAuthenticated={openDialogs.noAuthenticated}

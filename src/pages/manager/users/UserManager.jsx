@@ -57,12 +57,21 @@ const UserManager = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 401) {
-					setOpenDialogs({ ...openDialogs, noAuthenticated: true });
-				} else if (err.response.status === 403) {
-					setOpenDialogs({ ...openDialogs, NoAuthorized: true });
-				} else if (err.response.status === 404) {
-					setOpenDialogs({ ...openDialogs, notFound: true });
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						case 404:
+							setOpenDialogs({ ...openDialogs, notFound: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
 					setOpenDialogs({ ...openDialogs, err: true });
 				}
