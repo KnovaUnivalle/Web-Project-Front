@@ -11,7 +11,6 @@ const data = {
 const dataList = [data, data, data];
 
 const News = ({ dataNews = dataList }) => {
-
 	setTimeout(() => {}, 500);
 	return (
 		<article className='md:w-1/2'>

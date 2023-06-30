@@ -12,12 +12,12 @@ const Customer = () => {
 	const navigate = useNavigate();
 
 	const handleSubmit = (data) => {
-		navigate(`${SEARCH_CUSTOMER_PATH}?q=${data}`);
+		navigate(`${SEARCH_CUSTOMER_PATH}?page=1&product=${data}`);
 	};
 
 	return (
 		<>
-			<header className='p-3 sm:pt-7 lg:px-12 '>
+			<header className='p-3 sm:pt-7 lg:px-10'>
 				<nav className='min-w-full'>
 					<div className='flex justify-between'>
 						<Detective />

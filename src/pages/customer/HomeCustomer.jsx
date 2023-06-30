@@ -10,7 +10,8 @@ import Loader from '../../components/tools/Loader';
 const HomeCustomer = () => {
 	const [dataNews, setDataNews] = useState([]);
 	const [dataRec, setDataRec] = useState([]);
-	const [loading, setLoading] = useState({ news: true, rec: true });
+	const [loadingNews, setLoadingNew] = useState(true);
+	const [loadingRec, setLoadingRec] = useState(true);
 	const [openDialogs, setOpenDialogs] = useState({
 		err: false,
 	});
@@ -24,25 +25,43 @@ const HomeCustomer = () => {
 			.then((response) => {
 				if (response.status === 200) {
 					setDataNews(response.data);
-					setLoading({ ...loading, news: false });
+					setLoadingNew(false);
 				}
 			})
 			.catch((err) => {
 				setOpenDialogs({ ...openDialogs, err: true });
-				setLoading({ ...loading, news: false });
+				setLoadingNew(false);
+			});
+		API.get('suggestion/')
+			.then((response) => {
+				if (response.status === 200) {
+					setDataRec(response.data);
+					setLoadingRec(false);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				setOpenDialogs({ ...openDialogs, err: true });
+				setLoadingRec(false);
 			});
 	}, []);
 
 	return (
-		<main className='px-3 md:flex'>
-			{loading.news ? (
+		<main className='p-3 lg:px-1 md:flex'>
+			{loadingNews ? (
 				<div className='flex justify-center m-auto'>
 					<Loader />
 				</div>
 			) : (
 				<News dataNews={dataNews} />
 			)}
-			<Recomendations />
+			{loadingRec ? (
+				<div className='flex justify-center m-auto'>
+					<Loader />
+				</div>
+			) : (
+				<Recomendations />
+			)}
 			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNotFound} />
 		</main>
 	);

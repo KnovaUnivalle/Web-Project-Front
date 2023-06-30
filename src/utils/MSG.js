@@ -47,3 +47,13 @@ export const errorNotFound = {
 	title: 'No se han encontrado nada',
 	body: 'Verifica tu conexión a internet',
 };
+
+export const errorProducts = {
+	title: 'Algo ha fallado en la búsqueda',
+	body: 'Verifica tu conexión a internet',
+};
+
+export const errorNotFoundProducts = {
+	title: 'Algo ha fallado en la búsqueda',
+	body: 'Verifica tu conexión a internet',
+};
