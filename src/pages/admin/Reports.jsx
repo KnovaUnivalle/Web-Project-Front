@@ -143,7 +143,7 @@ const BarChart = ({ dataList, title, label, color, valueName }) => {
     },
   };
 
-  return <Bar width={80} height={0} data={data} options={options} />;
+  return <Bar data={data} options={options} />;
 };
 
 const style = {
