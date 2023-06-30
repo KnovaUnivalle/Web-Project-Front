@@ -11,35 +11,24 @@ import {
 import API from '../../../utils/API';
 import Loader from '../../../components/tools/Loader';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la carga de noticias',
-	body: 'Intenta Nuevamente',
-};
-
-const notFoundMessage = {
-	title: 'No se han encontrado noticias',
-	body: 'Recarga o haz una búsqueda',
-};
+import { errorNews, errorNotFoundNews } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const NewsManager = () => {
 	const [dataNews, setDataNews] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [reLoad, setReLoad] = useState(false);
-	const [openDialogs, setOpenDialogs] = useState({ err: false, notFound: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		errGen: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
-
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
-	};
-
-	const openNotFound = () => {
-		setOpenDialogs({ ...openDialogs, notFound: true });
 	};
 
 	const closeNotFound = () => {
@@ -76,10 +65,23 @@ const NewsManager = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response.status === 404) {
-					openNotFound();
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						case 404:
+							setOpenDialogs({ ...openDialogs, notFound: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
-					openErr();
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 				setLoading(false);
 			});
@@ -109,8 +111,12 @@ const NewsManager = () => {
 				)}
 			</div>
 			<News dataNews={dataNews} navigateNews={navigateNews} navigateEdit={navigateEditNews} />
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={notFoundMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorNews} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundNews} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</>
 	);
 };

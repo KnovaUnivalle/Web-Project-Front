@@ -12,16 +12,7 @@ import { MODE_ENV, SITE_KEY_ENV } from '../utils/ENV';
 import { HOME_PATHS, SIGN_UP_CUSTOMER_PATH } from '../utils/PATH';
 import { useAuth } from '../hooks/useAuth';
 import FormContainter from '../components/containers/FormContainter';
-
-const errorMessage = {
-	title: 'Fallo en el inicio de sesión',
-	body: 'Las credenciales no son correctas.',
-};
-
-const errorGeneralMessage = {
-	title: 'Error en el inicio de sesión',
-	body: 'Revisa tu conexión e intenta nuevamente',
-};
+import { errorGeneralSign, errorSign } from '../utils/MSG';
 
 const SignIn = () => {
 	const { token, rol, login } = useAuth();
@@ -34,7 +25,7 @@ const SignIn = () => {
 
 	const successNavigate = (data) => {
 		const { access, rol_id } = data;
-		login(access, rol_id, navigate(HOME_PATHS[rol_id]));
+		login(access, rol_id, () => navigate(HOME_PATHS[rol_id]));
 	};
 
 	const openErr = () => {
@@ -145,8 +136,8 @@ const SignIn = () => {
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 				<Button onClick={() => navigate(SIGN_UP_CUSTOMER_PATH)}>Registrarse</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorSign} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralSign} />
 		</FormContainter>
 	);
 };

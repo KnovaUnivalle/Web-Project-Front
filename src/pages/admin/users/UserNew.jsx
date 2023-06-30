@@ -5,33 +5,21 @@ import SignUpUser from '../../../components/forms/SignUpUser';
 import API from '../../../utils/API';
 import FormContainter from '../../../components/containers/FormContainter';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en el registro',
-	body: 'El Correo ya se encuentra registrado.',
-};
-
-const errorGeneralMessage = {
-	title: 'Error en el registro',
-	body: 'Revisa tu conexión e intenta nuevamente',
-};
+import { errorRegisterUser, errorUser } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserNew = () => {
-	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		errGen: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const navigate = useNavigate();
-
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
-
-	const openErrGen = () => {
-		setOpenDialogs({ ...openDialogs, errGen: true });
-	};
-
 	const closeErrGen = () => {
 		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
@@ -44,10 +32,20 @@ const UserNew = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response && err.response.status === 400) {
-					openErr();
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
-					openErrGen();
+					setOpenDialogs({ ...openDialogs, errGen: true });
 				}
 			});
 	};
@@ -57,8 +55,12 @@ const UserNew = () => {
 			<div className='pt-3'>
 				<Button onClick={() => navigate(-1)}>Regresar</Button>
 			</div>
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorRegisterUser} />
+			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</FormContainter>
 	);
 };

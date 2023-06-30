@@ -8,37 +8,26 @@ import InfoDialog from '../../../components/dialogs/InfoDialog';
 import Loader from '../../../components/tools/Loader';
 import { userSchemaUpdate } from '../../../schemas/signUpSchema';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
-
-const errorMessage = {
-	title: 'Fallo en el editar',
-	body: 'El Correo ya se encuentra registrado.',
-};
-
-const errorGeneralMessage = {
-	title: 'Error en el editar',
-	body: 'Revisa tu conexión e intenta nuevamente',
-};
+import { errorGeneralEdit, errorNotFoundUser } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const UserNew = () => {
 	const [dataUser, setDataUser] = useState({});
 	const [loading, setLoading] = useState(true);
-	const [openDialogs, setOpenDialogs] = useState({ err: false, errGen: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const navigate = useNavigate();
 	const { id } = useParams();
-
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
 
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
 	};
 
-	const openErrGen = () => {
-		setOpenDialogs({ ...openDialogs, errGen: true });
-	};
-
-	const closeErrGen = () => {
+	const closeNotFound = () => {
 		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
@@ -51,22 +40,54 @@ const UserNew = () => {
 				}
 			})
 			.catch((err) => {
-				if (err.response && err.response.status === 400) {
-					openErr();
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
 				} else {
-					openErrGen();
+					setOpenDialogs({ ...openDialogs, err: true });
 				}
 			});
 	};
 
 	useEffect(() => {
-		API.get(`users/${id}/`).then((response) => {
-			if (response.status === 200) {
-				response.data.password = '';
-				setDataUser(response.data);
+		API.get(`users/${id}/`)
+			.then((response) => {
+				if (response.status === 200) {
+					response.data.password = '';
+					setDataUser(response.data);
+					setLoading(false);
+				}
+			})
+			.catch((err) => {
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						case 404:
+							setOpenDialogs({ ...openDialogs, notFound: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
+				} else {
+					setOpenDialogs({ ...openDialogs, err: true });
+				}
 				setLoading(false);
-			}
-		});
+			});
 	}, []);
 
 	return (
@@ -90,8 +111,12 @@ const UserNew = () => {
 					</div>
 				</>
 			)}
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
-			<InfoDialog close={closeErrGen} open={openDialogs.errGen} message={errorGeneralMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorGeneralEdit} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundUser} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</FormContainter>
 	);
 };

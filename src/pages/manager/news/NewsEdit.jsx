@@ -8,25 +8,27 @@ import Loader from '../../../components/tools/Loader';
 import { compareDataToUpdate } from '../../../utils/AUXILIAR';
 import { NEWS_MANAGER_PATH } from '../../../utils/PATH';
 import InfoDialog from '../../../components/dialogs/InfoDialog';
-
-const errorMessage = {
-	title: 'Fallo en la edición de noticias',
-	body: 'Intenta Nuevamente',
-};
+import { errorGeneralEdit, errorNotFoundNews } from '../../../utils/MSG';
+import AuthDialog from '../../../components/dialogs/AuthDialog';
 
 const NewsEdit = () => {
 	const [dataNew, setDataNew] = useState({});
 	const [loading, setLoading] = useState(true);
-	const [openDialogs, setOpenDialogs] = useState({ err: false });
+	const [openDialogs, setOpenDialogs] = useState({
+		err: false,
+		notFound: false,
+		noAuthenticated: false,
+		NoAuthorized: false,
+	});
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const openErr = () => {
-		setOpenDialogs({ ...openDialogs, err: true });
-	};
-
 	const closeErr = () => {
 		setOpenDialogs({ ...openDialogs, err: false });
+	};
+
+	const closeNotFound = () => {
+		setOpenDialogs({ ...openDialogs, errGen: false });
 	};
 
 	const handleSubmit = (data) => {
@@ -38,7 +40,21 @@ const NewsEdit = () => {
 				}
 			})
 			.catch((err) => {
-				openErr();
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
+				} else {
+					setOpenDialogs({ ...openDialogs, err: true });
+				}
 			});
 	};
 
@@ -51,7 +67,25 @@ const NewsEdit = () => {
 				}
 			})
 			.catch((err) => {
-				openErr();
+				if (err.response) {
+					switch (err.response.status) {
+						case 401:
+							setOpenDialogs({ ...openDialogs, noAuthenticated: true });
+							break;
+						case 403:
+							setOpenDialogs({ ...openDialogs, NoAuthorized: true });
+							break;
+						case 404:
+							setOpenDialogs({ ...openDialogs, notFound: true });
+							break;
+						default:
+							setOpenDialogs({ ...openDialogs, err: true });
+							break;
+					}
+				} else {
+					setOpenDialogs({ ...openDialogs, err: true });
+				}
+				setLoading(false);
 			});
 	}, []);
 
@@ -74,7 +108,12 @@ const NewsEdit = () => {
 					</div>
 				</>
 			)}
-			<InfoDialog close={closeErr} open={openDialogs.err} message={errorMessage} />
+			<InfoDialog close={closeErr} open={openDialogs.err} message={errorGeneralEdit} />
+			<InfoDialog close={closeNotFound} open={openDialogs.notFound} message={errorNotFoundNews} />
+			<AuthDialog
+				noAuthenticated={openDialogs.noAuthenticated}
+				NoAuthorized={openDialogs.NoAuthorized}
+			/>
 		</FormContainter>
 	);
 };
