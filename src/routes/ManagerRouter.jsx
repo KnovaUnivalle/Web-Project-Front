@@ -8,8 +8,10 @@ const NewsEdit = lazy(() => import('../pages/manager/news/NewsEdit'));
 const NewsDetails = lazy(() => import('../pages/manager/news/NewsDetails'));
 const UserManager = lazy(() => import('../pages/manager/users/UserManager'));
 const UserDetails = lazy(() => import('../pages/manager/users/UserDetails'));
+const Reports = lazy(() => import('../pages/admin/Reports'));
 import Loading from '../pages/Loading';
 import {
+	GRAPHICS_MANAGER_AS_PATH,
 	NEWS_ADD_MANAGER_AS_PATH,
 	NEWS_EDIT_MANAGER_AS_PATH,
 	NEWS_MANAGER_AS_PATH,
@@ -28,6 +30,7 @@ const ManagerRouter = () => {
 				<Route path={`${NEWS_EDIT_MANAGER_AS_PATH}/:id`} element={<NewsEdit />} />
 				<Route path={USERS_MANAGER_AS_PATH} element={<UserManager />} />
 				<Route path={`${USERS_MANAGER_AS_PATH}/:id`} element={<UserDetails />} />
+				<Route path={GRAPHICS_MANAGER_AS_PATH} element={<Reports />} />
 			</Routes>
 		</Suspense>
 	);

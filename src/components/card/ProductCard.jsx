@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ dataProduct = [] }) => {
 	return (
@@ -23,7 +24,7 @@ const ProductCard = ({ dataProduct = [] }) => {
 					</p>
 					<p>{`Vendedor: ${dataProduct.store}`}</p>
 				</div>
-				<Button variant='contained' disableElevation>
+				<Button variant='contained' disableElevation href={dataProduct.url} target='_blanck'>
 					Ver más
 				</Button>
 			</div>
